@@ -207,8 +207,8 @@ function App() {
 
       <section id="skills" className="skills-section">
         <div className="container">
-          <h2 className="section-title">
-            Skills & <span style={{ position: 'relative' }}>Expertise<span className="skills-underline"></span></span>
+          <h2 className="section-title skills-title">
+            <span className="skills-text">Skills</span> & <span className="expertise-text">Expertise</span>
           </h2>
           <div className="skills-cards">
             <div className="skill-category-card">
