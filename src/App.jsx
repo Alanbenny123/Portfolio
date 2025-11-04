@@ -101,6 +101,7 @@ function App() {
           <ul className="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -157,6 +158,47 @@ function App() {
         </div>
       </section>
 
+      <section id="education" className="education">
+        <div className="container">
+          <h2 className="section-title education-title">
+            Education
+            <span className="education-underline"></span>
+          </h2>
+          <div className="education-list">
+            <div className="education-card">
+              <div className="education-icon">🎓</div>
+              <div className="education-content">
+                <div className="education-header">
+                  <h3 className="education-degree">B.Tech in Computer Science (Artificial Intelligence)</h3>
+                  <span className="education-duration">2022 - 2026</span>
+                </div>
+                <p className="education-institution">Adi Shankara Institute of Engineering and Technology</p>
+                <div className="education-coursework">
+                  <span className="coursework-label">Relevant Coursework:</span>
+                  <div className="coursework-tags">
+                    <span className="coursework-tag">Artificial Intelligence</span>
+                    <span className="coursework-tag">Machine Learning</span>
+                    <span className="coursework-tag">Data Structures</span>
+                    <span className="coursework-tag">Web Development</span>
+                    <span className="coursework-tag">Software Engineering</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="education-card">
+              <div className="education-icon">📚</div>
+              <div className="education-content">
+                <div className="education-header">
+                  <h3 className="education-degree">Higher Secondary Education (CBSE)</h3>
+                  <span className="education-duration">2020 - 2022</span>
+                </div>
+                <p className="education-institution">Viswajyothi CMI Public School, Angamaly, Kerala</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="projects" className="projects">
         <div className="container">
           <h2 className="section-title">Projects</h2>
@@ -191,10 +233,8 @@ function App() {
                       <h3>{repo.name.replace(/-/g, ' ').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h3>
                       <p>{repo.description}</p>
                       <div className="project-links">
-                        <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginRight: '1rem' }}>
-                          {repo.language}
-                        </span>
-                        <a href={repo.url} target="_blank" rel="noopener noreferrer" className="project-link">Code</a>
+                        <span className="project-language">{repo.language}</span>
+                        <a href={repo.url} target="_blank" rel="noopener noreferrer" className="project-link">View Code</a>
                       </div>
                     </div>
                   </div>
@@ -208,7 +248,7 @@ function App() {
       <section id="skills" className="skills-section">
         <div className="container">
           <h2 className="section-title skills-title">
-            <span className="skills-text">Skills</span> & <span className="expertise-text">Expertise</span>
+            <span className="skills-text">Skills</span> <span className="ampersand">&</span> <span className="expertise-text">Expertise</span>
           </h2>
           <div className="skills-cards">
             <div className="skill-category-card">
