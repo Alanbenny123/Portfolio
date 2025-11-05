@@ -5,6 +5,7 @@ function App() {
   const [scrolled, setScrolled] = useState(false)
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +14,24 @@ function App() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (mobileMenuOpen && !e.target.closest('.nav-container')) {
+        setMobileMenuOpen(false)
+      }
+    }
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+      document.addEventListener('click', handleClickOutside)
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+      document.body.style.overflow = 'unset'
+    }
+  }, [mobileMenuOpen])
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -27,22 +46,22 @@ function App() {
           'severless_realtime_poll': 2,
           'severless-realtime-poll': 2,
           'severless-realtime-poll-2': 2,
-          'bus_tracker': 3,
-          'bus-tracker': 3,
-          'bus-tracker-3': 3,
-          'insta_grabber': 4,
-          'insta-grabber': 4,
-          'insta-grabber-': 4,
-          'insta-grabber-4': 4,
-          'anime_grabber': 5,
-          'anime-grabber': 5,
-          'anime-grabber-5': 5,
-          'video_upscaler': 6,
-          'video-upscaler': 6,
-          'video-upscaler-6': 6,
-          'expenses_tracker_with_gui': 7,
-          'expenses-tracker-with-gui': 7,
-          'expenses-tracker-with-gui-7': 7
+          'insta_grabber': 3,
+          'insta-grabber': 3,
+          'insta-grabber-': 3,
+          'insta-grabber-4': 3,
+          'anime_grabber': 4,
+          'anime-grabber': 4,
+          'anime-grabber-5': 4,
+          'video_upscaler': 5,
+          'video-upscaler': 5,
+          'video-upscaler-6': 5,
+          'expenses_tracker_with_gui': 6,
+          'expenses-tracker-with-gui': 6,
+          'expenses-tracker-with-gui-7': 6,
+          'bus_tracker': 7,
+          'bus-tracker': 7,
+          'bus-tracker-3': 7
         }
         
         const getPriority = (name) => {
@@ -56,6 +75,18 @@ function App() {
         }
         
         // Filter out forks and sort by priority
+        // Known live demo URLs for specific projects
+        const liveDemoMap = {
+          'insta-grabber-': 'https://insta-grabber-black.vercel.app/',
+          'insta_grabber': 'https://insta-grabber-black.vercel.app/',
+          'severless-realtime-poll-2': 'http://polling-app-frontend-905418437059.s3-website-us-east-1.amazonaws.com/',
+          'severless_realtime_poll': 'http://polling-app-frontend-905418437059.s3-website-us-east-1.amazonaws.com/',
+          'video-upscaler': 'https://video-upscaler.vercel.app/',
+          'video_upscaler': 'https://video-upscaler.vercel.app/',
+          'bus-tracker': 'https://bustracker-pi.vercel.app/',
+          'bus_tracker': 'https://bustracker-pi.vercel.app/'
+        }
+
         const filteredRepos = data
           .filter(repo => !repo.fork && repo.name !== 'introduction-to-github')
           .map(repo => ({
@@ -64,6 +95,14 @@ function App() {
             url: repo.html_url,
             language: repo.language || 'Mixed',
             updated: repo.updated_at,
+            liveUrl: (() => {
+              const key = repo.name.toLowerCase()
+              // try exact, or underscores vs hyphens variants
+              if (liveDemoMap[key]) return liveDemoMap[key]
+              const alt1 = key.replace(/-/g, '_')
+              const alt2 = key.replace(/_/g, '-')
+              return liveDemoMap[alt1] || liveDemoMap[alt2]
+            })(),
             priority: getPriority(repo.name)
           }))
           .sort((a, b) => {
@@ -79,12 +118,12 @@ function App() {
         // Fallback to known repos if API fails (in priority order)
         setRepos([
           { name: 'Student_Behaviour_Analysis', description: 'AI-powered analysis system for student behavior patterns using machine learning.', url: 'https://github.com/Alanbenny123/Student_Behaviour_Analysis', language: 'Python' },
-          { name: 'Severless-Realtime-Poll-2', description: 'Serverless real-time polling application.', url: 'https://github.com/Alanbenny123/Severless-Realtime-Poll-2', language: 'Mixed' },
-          { name: 'BUS-TRACKER', description: 'Real-time bus tracking application built with TypeScript.', url: 'https://github.com/Alanbenny123/BUS-TRACKER', language: 'TypeScript' },
-          { name: 'Insta-grabber-', description: 'Instagram reels and photo downloader without watermark.', url: 'https://github.com/Alanbenny123/Insta-grabber-', language: 'TypeScript' },
+          { name: 'Severless-Realtime-Poll-2', description: 'Serverless real-time polling application.', url: 'https://github.com/Alanbenny123/Severless-Realtime-Poll-2', language: 'Mixed', liveUrl: 'http://polling-app-frontend-905418437059.s3-website-us-east-1.amazonaws.com/' },
+          { name: 'Insta-grabber-', description: 'Instagram reels and photo downloader without watermark.', url: 'https://github.com/Alanbenny123/Insta-grabber-', language: 'TypeScript', liveUrl: 'https://insta-grabber-black.vercel.app/' },
           { name: 'Anime-Grabber-5', description: 'Anime content grabber application.', url: 'https://github.com/Alanbenny123/Anime-Grabber-5', language: 'Mixed' },
-          { name: 'Video-Upscaler-6', description: 'AI-powered video upscaling application.', url: 'https://github.com/Alanbenny123/Video-Upscaler-6', language: 'Mixed' },
-          { name: 'Expenses_tracker_with_GUI', description: 'GUI-based expense tracking application for managing personal finances.', url: 'https://github.com/Alanbenny123/Expenses_tracker_with_GUI', language: 'Python' }
+          { name: 'Video-Upscaler-6', description: 'AI-powered video upscaling application.', url: 'https://github.com/Alanbenny123/Video-Upscaler-6', language: 'Mixed', liveUrl: 'https://video-upscaler.vercel.app/' },
+          { name: 'Expenses_tracker_with_GUI', description: 'GUI-based expense tracking application for managing personal finances.', url: 'https://github.com/Alanbenny123/Expenses_tracker_with_GUI', language: 'Python' },
+          { name: 'BUS-TRACKER', description: 'Real-time bus tracking application built with TypeScript.', url: 'https://github.com/Alanbenny123/BUS-TRACKER', language: 'TypeScript', liveUrl: 'https://bustracker-pi.vercel.app/' }
         ])
       } finally {
         setLoading(false)
@@ -98,13 +137,22 @@ function App() {
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="nav-container">
           <div className="logo">Alan Benny</div>
-          <ul className="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+          <button 
+            className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+            <li><a href="#home" onClick={() => setMobileMenuOpen(false)}>Home</a></li>
+            <li><a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a></li>
+            <li><a href="#education" onClick={() => setMobileMenuOpen(false)}>Education</a></li>
+            <li><a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a></li>
+            <li><a href="#skills" onClick={() => setMobileMenuOpen(false)}>Skills</a></li>
+            <li><a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a></li>
           </ul>
         </div>
       </nav>
@@ -192,7 +240,7 @@ function App() {
                   <h3 className="education-degree">Higher Secondary Education (CBSE)</h3>
                   <span className="education-duration">2020 - 2022</span>
                 </div>
-                <p className="education-institution">Viswajyothi CMI Public School, Angamaly, Kerala</p>
+                <p className="education-institution">Sree Sarada Vidyalaya, Kalady, Kerala</p>
               </div>
             </div>
           </div>
@@ -234,6 +282,9 @@ function App() {
                       <p>{repo.description}</p>
                       <div className="project-links">
                         <span className="project-language">{repo.language}</span>
+                        {repo.liveUrl && (
+                          <a href={repo.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link">Live</a>
+                        )}
                         <a href={repo.url} target="_blank" rel="noopener noreferrer" className="project-link">View Code</a>
                       </div>
                     </div>
@@ -293,23 +344,32 @@ function App() {
               I'm always open to discussing new projects, creative ideas, or
               opportunities to be part of your visions.
             </p>
-            <form className="contact-form">
+            <form className="contact-form" onSubmit={(e) => {
+              e.preventDefault()
+              const formData = new FormData(e.target)
+              const name = formData.get('name')
+              const email = formData.get('email')
+              const message = formData.get('message')
+              const subject = `Portfolio Contact: ${name}`
+              const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`
+              window.location.href = `mailto:alanbenny1357@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`
+            }}>
               <div className="form-group">
-                <input type="text" placeholder="Your Name" required />
+                <input type="text" name="name" placeholder="Your Name" required />
               </div>
               <div className="form-group">
-                <input type="email" placeholder="Your Email" required />
+                <input type="email" name="email" placeholder="Your Email" required />
               </div>
               <div className="form-group">
-                <textarea rows="5" placeholder="Your Message" required></textarea>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
               </div>
               <button type="submit" className="btn btn-primary">Send Message</button>
             </form>
             <div className="social-links">
               <a href="https://github.com/Alanbenny123" target="_blank" rel="noopener noreferrer" className="social-link">GitHub</a>
-              <a href="#" className="social-link">LinkedIn</a>
-              <a href="#" className="social-link">Twitter</a>
-              <a href="#" className="social-link">Email</a>
+              <a href="https://www.linkedin.com/in/alan-benny-7b8601292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
+              <a href="https://x.com/Alan_Benny199?t=PVof75iPFNOYzP5rHBzr1A&s=08" target="_blank" rel="noopener noreferrer" className="social-link">Twitter</a>
+              <a href="mailto:alanbenny1357@gmail.com" className="social-link">Email</a>
             </div>
           </div>
         </div>
