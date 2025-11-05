@@ -84,7 +84,10 @@ function App() {
           'video-upscaler': 'https://video-upscaler.vercel.app/',
           'video_upscaler': 'https://video-upscaler.vercel.app/',
           'bus-tracker': 'https://bustracker-pi.vercel.app/',
-          'bus_tracker': 'https://bustracker-pi.vercel.app/'
+          'bus_tracker': 'https://bustracker-pi.vercel.app/',
+          'anime-grabber': 'https://anime-grabber.vercel.app/',
+          'anime_grabber': 'https://anime-grabber.vercel.app/',
+          'anime-grabber-5': 'https://anime-grabber.vercel.app/'
         }
 
         const filteredRepos = data
