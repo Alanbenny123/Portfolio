@@ -87,7 +87,10 @@ function App() {
           'bus_tracker': 'https://bustracker-pi.vercel.app/',
           'anime-grabber': 'https://anime-grabber.vercel.app/',
           'anime_grabber': 'https://anime-grabber.vercel.app/',
-          'anime-grabber-5': 'https://anime-grabber.vercel.app/'
+          'anime-grabber-5': 'https://anime-grabber.vercel.app/',
+          'anime_grabber_5': 'https://anime-grabber.vercel.app/',
+          'expenses-tracker-with-gui': 'https://trackmyrupees.streamlit.app/',
+          'expenses_tracker_with_gui': 'https://trackmyrupees.streamlit.app/'
         }
 
         const filteredRepos = data
@@ -125,7 +128,7 @@ function App() {
           { name: 'Insta-grabber-', description: 'Instagram reels and photo downloader without watermark.', url: 'https://github.com/Alanbenny123/Insta-grabber-', language: 'TypeScript', liveUrl: 'https://insta-grabber-black.vercel.app/' },
           { name: 'Anime-Grabber-5', description: 'Anime content grabber application.', url: 'https://github.com/Alanbenny123/Anime-Grabber-5', language: 'Mixed' },
           { name: 'Video-Upscaler-6', description: 'AI-powered video upscaling application.', url: 'https://github.com/Alanbenny123/Video-Upscaler-6', language: 'Mixed', liveUrl: 'https://video-upscaler.vercel.app/' },
-          { name: 'Expenses_tracker_with_GUI', description: 'GUI-based expense tracking application for managing personal finances.', url: 'https://github.com/Alanbenny123/Expenses_tracker_with_GUI', language: 'Python' },
+          { name: 'Expenses_tracker_with_GUI', description: 'GUI-based expense tracking application for managing personal finances.', url: 'https://github.com/Alanbenny123/Expenses_tracker_with_GUI', language: 'Python', liveUrl: 'https://trackmyrupees.streamlit.app/' },
           { name: 'BUS-TRACKER', description: 'Real-time bus tracking application built with TypeScript.', url: 'https://github.com/Alanbenny123/BUS-TRACKER', language: 'TypeScript', liveUrl: 'https://bustracker-pi.vercel.app/' }
         ])
       } finally {
@@ -176,7 +179,7 @@ function App() {
           </div>
         </div>
         <div className="hero-image">
-          <div className="avatar-placeholder"></div>
+          <img src="/profile.png" alt="Alan Benny" className="profile-picture" />
         </div>
       </section>
 
