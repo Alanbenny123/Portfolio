@@ -6,6 +6,11 @@ function App() {
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [skills, setSkills] = useState({
+    programming: ['Python', 'JavaScript', 'TypeScript', 'HTML/CSS'],
+    tools: ['Docker', 'GitHub', 'VS Code', 'Git'],
+    expertise: ['Web Development', 'AI & ML Fundamentals', 'Computer Vision', 'Data Structures']
+  })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,8 +41,86 @@ function App() {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        const response = await fetch('https://api.github.com/users/Alanbenny123/repos?sort=updated&per_page=20')
+        const response = await fetch('https://api.github.com/users/Alanbenny123/repos?sort=updated&per_page=100')
         const data = await response.json()
+        
+        const defaultProgramming = ['Python', 'JavaScript', 'TypeScript', 'HTML/CSS', 'React']
+        const defaultTools = ['Docker', 'GitHub', 'VS Code', 'Git', 'Vercel', 'AWS', 'Excel']
+        const defaultExpertise = ['Web Development', 'AI & ML Fundamentals', 'Computer Vision', 'Data Structures', 'Data Analysis']
+        
+        const programmingLanguages = new Set(defaultProgramming)
+        const tools = new Set(defaultTools)
+        const expertise = new Set(defaultExpertise)
+        
+        data.forEach(repo => {
+          if (!repo.fork) {
+            const name = repo.name.toLowerCase()
+            const desc = (repo.description || '').toLowerCase()
+            const combined = name + ' ' + desc
+            const lang = repo.language
+            
+            if (lang) programmingLanguages.add(lang)
+            if (combined.includes('python') || lang === 'Python') programmingLanguages.add('Python')
+            if (combined.includes('javascript') || lang === 'JavaScript') programmingLanguages.add('JavaScript')
+            if (combined.includes('typescript') || lang === 'TypeScript') programmingLanguages.add('TypeScript')
+            if (combined.includes('html') || combined.includes('css')) programmingLanguages.add('HTML/CSS')
+            if (combined.includes('react')) programmingLanguages.add('React')
+            if (combined.includes('node')) tools.add('Node.js')
+            
+            if (combined.includes('streamlit')) tools.add('Streamlit')
+            if (combined.includes('vercel')) tools.add('Vercel')
+            if (combined.includes('aws') || combined.includes('amazon')) tools.add('AWS')
+            if (combined.includes('docker')) tools.add('Docker')
+            
+            if (combined.includes('web') || combined.includes('frontend') || combined.includes('backend')) {
+              expertise.add('Web Development')
+            }
+            if (combined.includes('ai') || combined.includes('artificial intelligence') || 
+                combined.includes('machine learning') || combined.includes('ml') ||
+                name.includes('behaviour') || name.includes('upscaler')) {
+              expertise.add('AI & ML Fundamentals')
+            }
+            if (combined.includes('computer vision') || combined.includes('cv') || 
+                name.includes('upscaler') || name.includes('video')) {
+              expertise.add('Computer Vision')
+            }
+            if (combined.includes('data structure') || combined.includes('algorithm')) {
+              expertise.add('Data Structures')
+            }
+            if (combined.includes('data analysis') || combined.includes('data analytics') || 
+                combined.includes('analytics') || name.includes('analysis') || name.includes('tracker')) {
+              expertise.add('Data Analysis')
+            }
+          }
+        })
+        
+        // Filter out non-programming languages (only keep actual programming languages)
+        const actualProgrammingLanguages = ['Python', 'JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'Java', 'C++', 'C', 'C#', 'Go', 'Rust', 'Swift', 'Kotlin', 'PHP', 'Ruby', 'R', 'Scala', 'Dart']
+        const nonProgrammingItems = ['Jupyter Notebook', 'Shell', 'Dockerfile', 'Makefile', 'CMake']
+        
+        const programmingArray = Array.from(programmingLanguages)
+          .filter(lang => actualProgrammingLanguages.includes(lang) && !nonProgrammingItems.includes(lang))
+          .sort()
+        
+        // Move non-programming items to tools
+        Array.from(programmingLanguages).forEach(item => {
+          if (nonProgrammingItems.includes(item)) {
+            tools.add(item)
+          }
+        })
+        
+        const toolsArray = Array.from(tools).sort()
+        const expertiseArray = Array.from(expertise).sort()
+        
+        // Make Programming and Expertise equal length (use minimum of both)
+        const minLength = Math.min(programmingArray.length, expertiseArray.length)
+        const targetLength = Math.max(minLength, 4) // At least 4 items
+        
+        setSkills({
+          programming: programmingArray.slice(0, targetLength),
+          tools: toolsArray, // Show all tools, no limit
+          expertise: expertiseArray.slice(0, targetLength)
+        })
         
         // Priority order for specific projects
         const priorityOrder = {
@@ -74,7 +157,6 @@ function App() {
           return 999 // Lower priority for other repos
         }
         
-        // Filter out forks and sort by priority
         // Known live demo URLs for specific projects
         const liveDemoMap = {
           'insta-grabber-': 'https://insta-grabber-black.vercel.app/',
@@ -103,7 +185,6 @@ function App() {
             updated: repo.updated_at,
             liveUrl: (() => {
               const key = repo.name.toLowerCase()
-              // try exact, or underscores vs hyphens variants
               if (liveDemoMap[key]) return liveDemoMap[key]
               const alt1 = key.replace(/-/g, '_')
               const alt2 = key.replace(/_/g, '-')
@@ -198,14 +279,17 @@ function App() {
             <div className="skills">
               <h3>Skills</h3>
               <div className="skills-grid">
-                <span className="skill-tag">Python</span>
-                <span className="skill-tag">JavaScript</span>
-                <span className="skill-tag">Artificial Intelligence</span>
-                <span className="skill-tag">React</span>
-                <span className="skill-tag">Machine Learning</span>
-                <span className="skill-tag">TypeScript</span>
-                <span className="skill-tag">Node.js</span>
-                <span className="skill-tag">Git</span>
+                {(() => {
+                  // Curated mix: Top 4-5 programming languages + 2-3 key tools
+                  const topLanguages = ['Python', 'JavaScript', 'TypeScript', 'HTML/CSS', 'React']
+                    .filter(lang => skills.programming.includes(lang))
+                    .slice(0, 5)
+                  const keyTools = ['Git', 'GitHub', 'Vercel']
+                    .filter(tool => skills.tools.includes(tool))
+                  return [...topLanguages, ...keyTools].map((skill, index) => (
+                    <span key={index} className="skill-tag">{skill}</span>
+                  ))
+                })()}
               </div>
             </div>
           </div>
@@ -312,30 +396,27 @@ function App() {
               <div className="skill-icon">{"</>"}</div>
               <h3 className="skill-category-title">Programming</h3>
               <div className="skill-items">
-                <span className="skill-item">Python</span>
-                <span className="skill-item">JavaScript</span>
-                <span className="skill-item">TypeScript</span>
-                <span className="skill-item">HTML/CSS</span>
+                {skills.programming.map((skill, index) => (
+                  <span key={index} className="skill-item">{skill}</span>
+                ))}
               </div>
             </div>
             <div className="skill-category-card">
               <div className="skill-icon">🔧</div>
               <h3 className="skill-category-title">Tools & Platforms</h3>
               <div className="skill-items">
-                <span className="skill-item">Docker</span>
-                <span className="skill-item">GitHub</span>
-                <span className="skill-item">VS Code</span>
-                <span className="skill-item">Git</span>
+                {skills.tools.map((tool, index) => (
+                  <span key={index} className="skill-item">{tool}</span>
+                ))}
               </div>
             </div>
             <div className="skill-category-card">
               <div className="skill-icon">✨</div>
               <h3 className="skill-category-title">Domain Expertise</h3>
               <div className="skill-items">
-                <span className="skill-item">Web Development</span>
-                <span className="skill-item">AI & ML Fundamentals</span>
-                <span className="skill-item">Computer Vision</span>
-                <span className="skill-item">Data Structures</span>
+                {skills.expertise.map((exp, index) => (
+                  <span key={index} className="skill-item">{exp}</span>
+                ))}
               </div>
             </div>
           </div>

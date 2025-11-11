@@ -31,15 +31,8 @@
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.5px;
-  color: var(--text-secondary);
-}
-
-/* Ensure black across browsers */
-@supports (background-clip: text) or (-webkit-background-clip: text) {
-  .logo {
-    -webkit-text-fill-color: var(--text-secondary);
-    color: var(--text-secondary);
-  }
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 .nav-links {
@@ -175,15 +168,8 @@
   font-size: 4rem;
   font-weight: 800;
   line-height: 1.1;
-  color: #000000;
-}
-
-/* Ensure white color across browsers */
-@supports (background-clip: text) or (-webkit-background-clip: text) {
-  .name {
-    -webkit-text-fill-color: #000000;
-    color: #000000;
-  }
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
 }
 
 .title {
