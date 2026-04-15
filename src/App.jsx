@@ -237,7 +237,7 @@ function App() {
         <ul className="nav-links">
           <li><a href="#home" onClick={() => setMobileMenuOpen(false)}>Home</a></li>
           <li><a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a></li>
-          <li><a href="#skills" onClick={() => setMobileMenuOpen(false)}>Skills</a></li>
+          <li><a href="#education" onClick={() => setMobileMenuOpen(false)}>Skills</a></li>
           <li><a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a></li>
           <li><a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a></li>
         </ul>
@@ -251,25 +251,26 @@ function App() {
 
       <section id="home" className="hero">
         <div className="hero-content">
-          <div className="hero-badges">
-            <span className="badge">IT Engineer</span>
-            <span className="badge">Web Developer</span>
-            <span className="badge">UI/UX Designer</span>
-          </div>
           <h1 className="hero-title">
             <span className="greeting">Hello,</span>
-            <div className="name-container">
-              <span className="text-small">I am</span>
+            <div className="name-wrapper">
+              <span className="i-am">I am</span>
               <span className="name">Alan Benny</span>
             </div>
           </h1>
-          <p className="hero-description">
-            Experienced software engineer with expertise in multiple domains. 
-            I build innovative solutions that blend creativity with technical excellence.
-          </p>
-          <div className="hero-buttons">
-            <a href="#projects" className="btn btn-primary">View Projects</a>
-            <a href="#contact" className="btn btn-secondary">Let's Talk</a>
+          <div className="hero-roles">
+            <div className="role-item">
+              <div className="role-icon">💻</div>
+              <span>IT Engineer</span>
+            </div>
+            <div className="role-item">
+              <div className="role-icon">🌐</div>
+              <span>Web Dev</span>
+            </div>
+            <div className="role-item">
+              <div className="role-icon">🎨</div>
+              <span>UI/UX Designer</span>
+            </div>
           </div>
         </div>
         <div className="hero-image">
@@ -279,31 +280,40 @@ function App() {
 
       <section id="about" className="about">
         <div className="container">
-          <h2 className="section-title">About Me</h2>
-          <div className="about-content">
-            <div className="about-text">
-              <p>
-                A highly motivated B.Tech graduate in Computer Science with a specialization in Artificial Intelligence, seeking to leverage expertise in Python, JavaScript, and innovative project development to contribute to cutting-edge technology solutions.
-              </p>
-              <p>
-                Passionate about creating impactful applications and solving real-world problems through programming and AI. Highly passionate about learning new things and acquiring new skills.
-              </p>
-            </div>
-            <div className="skills">
-              <h3>Skills</h3>
-              <div className="skills-grid">
-                {(() => {
-                  // Curated mix: Top 4-5 programming languages + 2-3 key tools
-                  const topLanguages = ['Python', 'JavaScript', 'TypeScript', 'HTML/CSS', 'React']
-                    .filter(lang => skills.programming.includes(lang))
-                    .slice(0, 5)
-                  const keyTools = ['Git', 'GitHub', 'Vercel']
-                    .filter(tool => skills.tools.includes(tool))
-                  return [...topLanguages, ...keyTools].map((skill, index) => (
-                    <span key={index} className="skill-tag">{skill}</span>
-                  ))
-                })()}
+          <h2 className="section-title-left">About Me</h2>
+          <div className="about-intro">
+            <p>
+              A highly motivated B.Tech graduate in Computer Science with a specialization in Artificial Intelligence. 
+              Passionate about creating AI-driven solutions, innovative web applications, and solving real-world problems through programming.
+            </p>
+          </div>
+          <div className="about-cards">
+            <div className="about-card">
+              <div className="about-icon">🎓</div>
+              <div className="about-text">
+                <h3>Education & Expertise</h3>
+                <p>B.Tech in Computer Science (AI) from Adi Shankara Institute of Engineering and Technology (2022-2026)</p>
               </div>
+              <div className="about-arrow">→</div>
+            </div>
+            <div className="about-card">
+              <div className="about-icon">💡</div>
+              <div className="about-text">
+                <h3>Professional Skills</h3>
+                <p>Expertise in Python, JavaScript, React, AI/ML, and modern web development technologies</p>
+              </div>
+              <div className="about-arrow">→</div>
+            </div>
+          </div>
+          <div className="skills-showcase">
+            <h3>Technical Skills</h3>
+            <div className="skills-grid">
+              {skills.programming.slice(0, 5).map((skill, index) => (
+                <span key={index} className="skill-tag">{skill}</span>
+              ))}
+              {skills.tools.slice(0, 4).map((tool, index) => (
+                <span key={index + 10} className="skill-tag">{tool}</span>
+              ))}
             </div>
           </div>
         </div>
@@ -311,40 +321,39 @@ function App() {
 
       <section id="education" className="education">
         <div className="container">
-          <h2 className="section-title education-title">
-            Education
-            <span className="education-underline"></span>
-          </h2>
-          <div className="education-list">
-            <div className="education-card">
-              <div className="education-icon">🎓</div>
-              <div className="education-content">
-                <div className="education-header">
-                  <h3 className="education-degree">B.Tech in Computer Science (Artificial Intelligence)</h3>
-                  <span className="education-duration">2022 - 2026</span>
-                </div>
-                <p className="education-institution">Adi Shankara Institute of Engineering and Technology</p>
-                <div className="education-coursework">
-                  <span className="coursework-label">Relevant Coursework:</span>
-                  <div className="coursework-tags">
-                    <span className="coursework-tag">Artificial Intelligence</span>
-                    <span className="coursework-tag">Machine Learning</span>
-                    <span className="coursework-tag">Data Structures</span>
-                    <span className="coursework-tag">Web Development</span>
-                    <span className="coursework-tag">Software Engineering</span>
-                  </div>
-                </div>
-              </div>
+          <h2 className="section-title-center">My Skills and Development</h2>
+          <div className="skills-grid-four">
+            <div className="skill-box">
+              <div className="skill-icon-large">⚡</div>
+              <h3>Fast</h3>
+              <p>Fast load times and lag-free interaction with optimized code and efficient algorithms.</p>
             </div>
-            <div className="education-card">
-              <div className="education-icon">📚</div>
-              <div className="education-content">
-                <div className="education-header">
-                  <h3 className="education-degree">Higher Secondary Education (CBSE)</h3>
-                  <span className="education-duration">2020 - 2022</span>
+            <div className="skill-box">
+              <div className="skill-icon-large">💻</div>
+              <h3>Responsive</h3>
+              <p>Mobile-first design approach ensuring seamless experience across all devices.</p>
+            </div>
+            <div className="skill-box">
+              <div className="skill-icon-large">💡</div>
+              <h3>Intuitive</h3>
+              <p>User-centered design with clean interfaces and smooth user experiences.</p>
+            </div>
+            <div className="skill-box">
+              <div className="skill-icon-large">🚀</div>
+              <h3>Dynamic</h3>
+              <p>Interactive applications with modern frameworks like React, Next.js, and TypeScript.</p>
+            </div>
+          </div>
+          
+          <div className="domain-expertise">
+            <h3 className="expertise-title">Domain Expertise</h3>
+            <div className="expertise-grid">
+              {skills.expertise.map((exp, index) => (
+                <div key={index} className="expertise-item">
+                  <span className="check-icon">✓</span>
+                  <span>{exp}</span>
                 </div>
-                <p className="education-institution">Sree Sarada Vidyalaya, Kalady, Kerala</p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -352,114 +361,100 @@ function App() {
 
       <section id="projects" className="projects">
         <div className="container">
-          <h2 className="section-title">Innovative IT Solutions<br /><span className="subtitle">Delivered</span></h2>
+          <h2 className="section-title-center">My Recent Projects</h2>
+          <p className="projects-subtitle">Innovative IT Solutions Delivered</p>
+          
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
-              Loading projects...
-            </div>
+            <div className="loading-state">Loading projects...</div>
           ) : (
-            <div className="projects-bento-grid">
-              {repos.slice(0, 6).map((repo, index) => {
-                const getEmoji = (name) => {
-                  const lowerName = name.toLowerCase()
-                  if (lowerName.includes('student') || lowerName.includes('behaviour')) return '📊'
-                  if (lowerName.includes('poll') || lowerName.includes('severless')) return '🗳️'
-                  if (lowerName.includes('bus')) return '🚌'
-                  if (lowerName.includes('insta') && lowerName.includes('grabber')) return '📸'
-                  if (lowerName.includes('anime') && lowerName.includes('grabber')) return '🎌'
-                  if (lowerName.includes('video') && lowerName.includes('upscaler')) return '🎬'
-                  if (lowerName.includes('expense') || lowerName.includes('tracker')) return '💰'
-                  if (lowerName.includes('grabber')) return '📥'
-                  if (lowerName.includes('ai') || lowerName.includes('machine')) return '🤖'
-                  if (lowerName.includes('web') || lowerName.includes('app')) return '🌐'
-                  return '💻'
-                }
-                
-                return (
-                  <div key={index} className={`project-bento-card ${index === 0 ? 'featured' : ''}`}>
-                    <div className="project-image-large">
-                      <div className="project-placeholder-large">{getEmoji(repo.name)}</div>
-                    </div>
-                    <div className="project-info">
-                      <h3>{repo.name.replace(/-/g, ' ').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h3>
-                      <p>{repo.description}</p>
-                      <div className="project-links">
-                        <span className="project-language">{repo.language}</span>
+            <>
+              <div className="project-showcase">
+                <div className="project-mockups">
+                  {repos.slice(0, 3).map((repo, index) => (
+                    <div key={index} className="mockup-card">
+                      <div className="mockup-screen">
+                        <div className="mockup-emoji">{
+                          repo.name.toLowerCase().includes('student') || repo.name.toLowerCase().includes('behaviour') ? '📊' :
+                          repo.name.toLowerCase().includes('poll') ? '🗳️' :
+                          repo.name.toLowerCase().includes('insta') ? '📸' :
+                          repo.name.toLowerCase().includes('anime') ? '🎌' :
+                          repo.name.toLowerCase().includes('video') ? '🎬' :
+                          repo.name.toLowerCase().includes('expense') || repo.name.toLowerCase().includes('tracker') ? '💰' :
+                          repo.name.toLowerCase().includes('bus') ? '🚌' : '💻'
+                        }</div>
+                      </div>
+                      <div className="mockup-info">
+                        <h4>{repo.name.replace(/-/g, ' ').replace(/_/g, ' ')}</h4>
+                        <p className="mockup-lang">{repo.language}</p>
                         {repo.liveUrl && (
-                          <a href={repo.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link">Live Demo</a>
+                          <a href={repo.liveUrl} target="_blank" rel="noopener noreferrer" className="mockup-link">View Live →</a>
                         )}
-                        <a href={repo.url} target="_blank" rel="noopener noreferrer" className="project-link">View Code</a>
+                        <a href={repo.url} target="_blank" rel="noopener noreferrer" className="mockup-link">GitHub →</a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {repos[0] && (
+                <div className="project-featured">
+                  <div className="featured-image">
+                    <div className="featured-screen">
+                      <div className="screen-header">
+                        <div className="dots">
+                          <span></span><span></span><span></span>
+                        </div>
+                        <div className="browser-url">{repos[0].liveUrl || 'github.com'}</div>
+                      </div>
+                      <div className="screen-content">
+                        <div className="project-badge">{repos[0].language}</div>
+                        <h3>{repos[0].name.replace(/-/g, ' ').replace(/_/g, ' ')}</h3>
+                        <p>{repos[0].description}</p>
                       </div>
                     </div>
                   </div>
-                )
-              })}
-            </div>
-          )}
-        </div>
-      </section>
+                  <div className="featured-text">
+                    <h3>Featured Project</h3>
+                    <h2>{repos[0].name.replace(/-/g, ' ').replace(/_/g, ' ')}</h2>
+                    <p>{repos[0].description}</p>
+                    <ul className="project-highlights">
+                      <li>Built with {repos[0].language}</li>
+                      <li>Modern, scalable architecture</li>
+                      <li>Responsive and user-friendly</li>
+                      {repos[0].liveUrl && <li>Deployed and production-ready</li>}
+                    </ul>
+                    <div className="featured-links">
+                      {repos[0].liveUrl && (
+                        <a href={repos[0].liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">View Live</a>
+                      )}
+                      <a href={repos[0].url} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">View Code</a>
+                    </div>
+                  </div>
+                </div>
+              )}
 
-      <section id="skills" className="skills-section">
-        <div className="container">
-          <h2 className="section-title">Custom IT Solutions<br /><span className="subtitle">Tailored to Your Needs</span></h2>
-          <div className="skills-cards">
-            <div className="skill-category-card">
-              <div className="skill-icon-box">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/>
-                </svg>
+              <div className="all-projects">
+                <h3>All Projects</h3>
+                <div className="projects-list">
+                  {repos.slice(3, 10).map((repo, index) => (
+                    <div key={index} className="project-item">
+                      <div className="project-item-header">
+                        <h4>{repo.name.replace(/-/g, ' ').replace(/_/g, ' ')}</h4>
+                        <span className="project-lang">{repo.language}</span>
+                      </div>
+                      <p>{repo.description}</p>
+                      <div className="project-item-links">
+                        {repo.liveUrl && (
+                          <a href={repo.liveUrl} target="_blank" rel="noopener noreferrer">Live Demo</a>
+                        )}
+                        <a href={repo.url} target="_blank" rel="noopener noreferrer">GitHub</a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <h3 className="skill-category-title">Cloud Infrastructure Setup</h3>
-              <div className="skill-description">
-                <p>• AWS, Azure, Google Cloud expertise</p>
-                <p>• Scalable and reliable cloud architecture</p>
-                <p>• DevOps and CI/CD pipeline integration</p>
-              </div>
-            </div>
-            <div className="skill-category-card">
-              <div className="skill-icon-box">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="2" y="3" width="20" height="14" rx="2"/>
-                  <line x1="8" y1="21" x2="16" y2="21"/>
-                  <line x1="12" y1="17" x2="12" y2="21"/>
-                </svg>
-              </div>
-              <h3 className="skill-category-title">Responsive Web Development</h3>
-              <div className="skill-description">
-                <p>• Custom WordPress development</p>
-                <p>• React.js, Next.js applications</p>
-                <p>• Mobile-first, SEO-optimized design</p>
-              </div>
-            </div>
-            <div className="skill-category-card">
-              <div className="skill-icon-box">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
-              </div>
-              <h3 className="skill-category-title">Cybersecurity Solutions</h3>
-              <div className="skill-description">
-                <p>• Vulnerability assessment</p>
-                <p>• Penetration testing</p>
-                <p>• Security audits and compliance</p>
-              </div>
-            </div>
-            <div className="skill-category-card">
-              <div className="skill-icon-box">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="16 18 22 12 16 6"/>
-                  <polyline points="8 6 2 12 8 18"/>
-                </svg>
-              </div>
-              <h3 className="skill-category-title">DevOps & Automation</h3>
-              <div className="skill-description">
-                <p>• CI/CD pipelines with Jenkins, Docker</p>
-                <p>• Infrastructure as Code (Terraform)</p>
-                <p>• Monitoring and alerting systems</p>
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       </section>
 
