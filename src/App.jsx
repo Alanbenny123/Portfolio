@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(false) // kept for navbar class only
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -13,10 +13,17 @@ function App() {
   })
 
   useEffect(() => {
+    let ticking = false
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50)
+          ticking = false
+        })
+        ticking = true
+      }
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 

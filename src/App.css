@@ -6,15 +6,12 @@
   right: 0;
   z-index: 1000;
   padding: 1.25rem 0;
-  background: rgba(10, 10, 10, 0.7);
-  backdrop-filter: blur(10px);
+  background: #0f0f0f;
   border-bottom: 1px solid var(--border-color);
-  transition: background 0.3s ease, padding 0.3s ease;
 }
 
 .top-navbar.scrolled {
   padding: 0.875rem 0;
-  background: rgba(10, 10, 10, 0.95);
 }
 
 .nav-inner {
@@ -120,15 +117,6 @@
   overflow: hidden;
 }
 
-/* Purple glow blob — no animation, no performance hit */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 70% at 50% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
 
 /* LEFT */
 .hero-left {
@@ -203,7 +191,6 @@
   border-radius: 16px;
   overflow: hidden;
   border: 2px solid rgba(139, 92, 246, 0.35);
-  box-shadow: 0 0 60px rgba(139, 92, 246, 0.2), 0 20px 40px rgba(0,0,0,0.5);
 }
 
 .profile-picture {
@@ -324,7 +311,7 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
   cursor: pointer;
 }
 
@@ -394,14 +381,14 @@
   color: var(--primary-color);
   font-weight: 500;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .skill-tag:hover {
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(217, 70, 239, 0.2));
   border-color: var(--primary-color);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  
 }
 
 /* Education/Skills Section */
@@ -424,14 +411,14 @@
   border-radius: 16px;
   padding: 2.5rem 2rem;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .skill-box:hover {
   background: rgba(30, 30, 30, 0.8);
   border-color: var(--primary-color);
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+  
 }
 
 .skill-icon-large {
@@ -482,7 +469,7 @@
   background: rgba(139, 92, 246, 0.05);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .expertise-item:hover {
@@ -548,13 +535,13 @@
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .mockup-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary-color);
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+  
 }
 
 .mockup-screen {
@@ -773,13 +760,13 @@
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 2rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .project-item:hover {
   border-color: var(--primary-color);
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+  
 }
 
 .project-item-header {
@@ -836,7 +823,7 @@
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
   display: inline-block;
   border: 2px solid transparent;
 }
@@ -849,7 +836,7 @@
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+  
   background: linear-gradient(135deg, #9333ea, #ec4899);
 }
 
@@ -911,14 +898,14 @@
   color: var(--text-primary);
   font-size: 1rem;
   font-family: inherit;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  outline: 2px solid var(--primary-color);
   background: var(--bg-light);
 }
 
