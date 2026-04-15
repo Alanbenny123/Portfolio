@@ -221,60 +221,57 @@ function App() {
 
   return (
     <div className="App">
-      <nav className={`side-navbar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
-        <div className="nav-header">
+      <nav className={`top-navbar ${scrolled ? 'scrolled' : ''}`}>
+        <div className="nav-inner">
           <div className="logo">AB</div>
-          <button 
+          <ul className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+            <li><a href="#home" onClick={() => setMobileMenuOpen(false)}>About Me</a></li>
+            <li><a href="#education" onClick={() => setMobileMenuOpen(false)}>Skills</a></li>
+            <li><a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a></li>
+          </ul>
+          <a href="#contact" className="nav-cta" onClick={() => setMobileMenuOpen(false)}>Contact Me</a>
+          <button
             className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
           </button>
         </div>
-        <ul className="nav-links">
-          <li><a href="#home" onClick={() => setMobileMenuOpen(false)}>Home</a></li>
-          <li><a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a></li>
-          <li><a href="#education" onClick={() => setMobileMenuOpen(false)}>Skills</a></li>
-          <li><a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a></li>
-          <li><a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a></li>
-        </ul>
-        <div className="nav-footer">
-          <a href="https://github.com/Alanbenny123" target="_blank" rel="noopener noreferrer" className="nav-social">GitHub</a>
-          <a href="https://www.linkedin.com/in/alan-benny-7b8601292" target="_blank" rel="noopener noreferrer" className="nav-social">LinkedIn</a>
-        </div>
       </nav>
-      
+
       <div className="main-content">
 
       <section id="home" className="hero">
-        <div className="hero-content">
-          <h1 className="hero-title">
-            <span className="greeting">Hello,</span>
-            <div className="name-wrapper">
-              <span className="i-am">I am</span>
-              <span className="name">Alan Benny</span>
-            </div>
-          </h1>
-          <div className="hero-roles">
-            <div className="role-item">
-              <div className="role-icon">💻</div>
-              <span>IT Engineer</span>
-            </div>
-            <div className="role-item">
-              <div className="role-icon">🌐</div>
-              <span>Web Dev</span>
-            </div>
-            <div className="role-item">
-              <div className="role-icon">🎨</div>
-              <span>UI/UX Designer</span>
-            </div>
+        {/* Left — roles */}
+        <div className="hero-left">
+          <h1 className="greeting">Hello,</h1>
+          <p className="hero-tagline">
+            Delivering efficient, scalable solutions to transform your tech vision into reality.
+          </p>
+          <div className="hero-roles-list">
+            <div className="role-badge"><span className="role-dash">—</span><span>IT Engineer</span></div>
+            <div className="role-badge"><span className="role-dash">—</span><span>Web Dev</span></div>
+            <div className="role-badge"><span className="role-dash">—</span><span>Data Engineer</span></div>
           </div>
         </div>
-        <div className="hero-image">
-          <img src="/profile.png" alt="Alan Benny" className="profile-picture" />
+
+        {/* Center — photo */}
+        <div className="hero-center">
+          <div className="photo-frame">
+            <img src="/profile.png" alt="Alan Benny" className="profile-picture" />
+          </div>
+          <div className="social-float">
+            <a href="https://github.com/Alanbenny123" target="_blank" rel="noopener noreferrer" className="social-icon-btn">GH</a>
+            <a href="https://www.linkedin.com/in/alan-benny-7b8601292" target="_blank" rel="noopener noreferrer" className="social-icon-btn">in</a>
+            <a href="https://x.com/Alan_Benny199" target="_blank" rel="noopener noreferrer" className="social-icon-btn">𝕏</a>
+          </div>
+        </div>
+
+        {/* Right — name */}
+        <div className="hero-right">
+          <span className="i-am-label">I am</span>
+          <h2 className="hero-name">Alan<br />Benny</h2>
         </div>
       </section>
 
