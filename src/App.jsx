@@ -221,9 +221,9 @@ function App() {
 
   return (
     <div className="App">
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-        <div className="nav-container">
-          <div className="logo">Alan Benny</div>
+      <nav className={`side-navbar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+        <div className="nav-header">
+          <div className="logo">AB</div>
           <button 
             className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -233,30 +233,43 @@ function App() {
             <span></span>
             <span></span>
           </button>
-          <ul className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
-            <li><a href="#home" onClick={() => setMobileMenuOpen(false)}>Home</a></li>
-            <li><a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a></li>
-            <li><a href="#education" onClick={() => setMobileMenuOpen(false)}>Education</a></li>
-            <li><a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a></li>
-            <li><a href="#skills" onClick={() => setMobileMenuOpen(false)}>Skills</a></li>
-            <li><a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a></li>
-          </ul>
+        </div>
+        <ul className="nav-links">
+          <li><a href="#home" onClick={() => setMobileMenuOpen(false)}>Home</a></li>
+          <li><a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a></li>
+          <li><a href="#skills" onClick={() => setMobileMenuOpen(false)}>Skills</a></li>
+          <li><a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a></li>
+          <li><a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a></li>
+        </ul>
+        <div className="nav-footer">
+          <a href="https://github.com/Alanbenny123" target="_blank" rel="noopener noreferrer" className="nav-social">GitHub</a>
+          <a href="https://www.linkedin.com/in/alan-benny-7b8601292" target="_blank" rel="noopener noreferrer" className="nav-social">LinkedIn</a>
         </div>
       </nav>
+      
+      <div className="main-content">
 
       <section id="home" className="hero">
         <div className="hero-content">
+          <div className="hero-badges">
+            <span className="badge">IT Engineer</span>
+            <span className="badge">Web Developer</span>
+            <span className="badge">UI/UX Designer</span>
+          </div>
           <h1 className="hero-title">
-            <span className="greeting">Hi, I'm</span>
-            <span className="name">Alan Benny</span>
-            <span className="title">AI-Driven Solutions Developer</span>
+            <span className="greeting">Hello,</span>
+            <div className="name-container">
+              <span className="text-small">I am</span>
+              <span className="name">Alan Benny</span>
+            </div>
           </h1>
           <p className="hero-description">
-            B.Tech Computer Science student passionate about creating AI-driven solutions and innovative applications
+            Experienced software engineer with expertise in multiple domains. 
+            I build innovative solutions that blend creativity with technical excellence.
           </p>
           <div className="hero-buttons">
-            <a href="#projects" className="btn btn-primary">View Work</a>
-            <a href="#contact" className="btn btn-secondary">Get In Touch</a>
+            <a href="#projects" className="btn btn-primary">View Projects</a>
+            <a href="#contact" className="btn btn-secondary">Let's Talk</a>
           </div>
         </div>
         <div className="hero-image">
@@ -339,14 +352,14 @@ function App() {
 
       <section id="projects" className="projects">
         <div className="container">
-          <h2 className="section-title">Projects</h2>
+          <h2 className="section-title">Innovative IT Solutions<br /><span className="subtitle">Delivered</span></h2>
           {loading ? (
             <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
               Loading projects...
             </div>
           ) : (
-            <div className="projects-grid">
-              {repos.map((repo, index) => {
+            <div className="projects-bento-grid">
+              {repos.slice(0, 6).map((repo, index) => {
                 const getEmoji = (name) => {
                   const lowerName = name.toLowerCase()
                   if (lowerName.includes('student') || lowerName.includes('behaviour')) return '📊'
@@ -363,9 +376,9 @@ function App() {
                 }
                 
                 return (
-                  <div key={index} className="project-card">
-                    <div className="project-image">
-                      <div className="project-placeholder">{getEmoji(repo.name)}</div>
+                  <div key={index} className={`project-bento-card ${index === 0 ? 'featured' : ''}`}>
+                    <div className="project-image-large">
+                      <div className="project-placeholder-large">{getEmoji(repo.name)}</div>
                     </div>
                     <div className="project-info">
                       <h3>{repo.name.replace(/-/g, ' ').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h3>
@@ -373,7 +386,7 @@ function App() {
                       <div className="project-links">
                         <span className="project-language">{repo.language}</span>
                         {repo.liveUrl && (
-                          <a href={repo.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link">Live</a>
+                          <a href={repo.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link">Live Demo</a>
                         )}
                         <a href={repo.url} target="_blank" rel="noopener noreferrer" className="project-link">View Code</a>
                       </div>
@@ -388,35 +401,62 @@ function App() {
 
       <section id="skills" className="skills-section">
         <div className="container">
-          <h2 className="section-title skills-title">
-            <span className="skills-text">Skills</span> <span className="ampersand">&</span> <span className="expertise-text">Expertise</span>
-          </h2>
+          <h2 className="section-title">Custom IT Solutions<br /><span className="subtitle">Tailored to Your Needs</span></h2>
           <div className="skills-cards">
             <div className="skill-category-card">
-              <div className="skill-icon">{"</>"}</div>
-              <h3 className="skill-category-title">Programming</h3>
-              <div className="skill-items">
-                {skills.programming.map((skill, index) => (
-                  <span key={index} className="skill-item">{skill}</span>
-                ))}
+              <div className="skill-icon-box">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/>
+                </svg>
+              </div>
+              <h3 className="skill-category-title">Cloud Infrastructure Setup</h3>
+              <div className="skill-description">
+                <p>• AWS, Azure, Google Cloud expertise</p>
+                <p>• Scalable and reliable cloud architecture</p>
+                <p>• DevOps and CI/CD pipeline integration</p>
               </div>
             </div>
             <div className="skill-category-card">
-              <div className="skill-icon">🔧</div>
-              <h3 className="skill-category-title">Tools & Platforms</h3>
-              <div className="skill-items">
-                {skills.tools.map((tool, index) => (
-                  <span key={index} className="skill-item">{tool}</span>
-                ))}
+              <div className="skill-icon-box">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <h3 className="skill-category-title">Responsive Web Development</h3>
+              <div className="skill-description">
+                <p>• Custom WordPress development</p>
+                <p>• React.js, Next.js applications</p>
+                <p>• Mobile-first, SEO-optimized design</p>
               </div>
             </div>
             <div className="skill-category-card">
-              <div className="skill-icon">✨</div>
-              <h3 className="skill-category-title">Domain Expertise</h3>
-              <div className="skill-items">
-                {skills.expertise.map((exp, index) => (
-                  <span key={index} className="skill-item">{exp}</span>
-                ))}
+              <div className="skill-icon-box">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <h3 className="skill-category-title">Cybersecurity Solutions</h3>
+              <div className="skill-description">
+                <p>• Vulnerability assessment</p>
+                <p>• Penetration testing</p>
+                <p>• Security audits and compliance</p>
+              </div>
+            </div>
+            <div className="skill-category-card">
+              <div className="skill-icon-box">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="16 18 22 12 16 6"/>
+                  <polyline points="8 6 2 12 8 18"/>
+                </svg>
+              </div>
+              <h3 className="skill-category-title">DevOps & Automation</h3>
+              <div className="skill-description">
+                <p>• CI/CD pipelines with Jenkins, Docker</p>
+                <p>• Infrastructure as Code (Terraform)</p>
+                <p>• Monitoring and alerting systems</p>
               </div>
             </div>
           </div>
@@ -465,6 +505,7 @@ function App() {
       <footer className="footer">
         <p>&copy; 2025 Alan Benny. Built with React & Vite</p>
       </footer>
+      </div>
     </div>
   )
 }
