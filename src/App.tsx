@@ -11,7 +11,16 @@ import {
   Cpu,
   Github,
   Linkedin,
-  Mail
+  Mail,
+  GraduationCap,
+  BookOpen,
+  Activity,
+  Camera,
+  BusFront,
+  Wallet,
+  Video,
+  Tv,
+  Vote
 } from 'lucide-react';
 
 const XLogo = ({ className }: { className?: string }) => (
@@ -226,7 +235,7 @@ export default function App() {
                 </a>
               </div>
               <div className="mt-12 w-full h-48 bg-[#1a1a1a] rounded-xl border border-white/5 flex items-center justify-center group-hover:border-[#d4f600]/20 transition-colors relative overflow-hidden">
-                 <span className="text-7xl drop-shadow-2xl opacity-90 transform group-hover:scale-110 transition-transform duration-500">📊</span>
+                 <Activity className="w-24 h-24 drop-shadow-2xl stroke-white group-hover:stroke-[#d4f600] opacity-90 transform group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               </div>
             </div>
 
@@ -241,7 +250,7 @@ export default function App() {
                 Live Demo <ArrowUpRight className="w-3 h-3" />
               </a>
               <div className="w-full flex justify-center mt-auto">
-                 <span className="text-5xl drop-shadow-2xl opacity-90 transform group-hover:scale-110 transition-transform duration-500">📸</span>
+                 <Camera className="w-16 h-16 drop-shadow-2xl stroke-zinc-400 group-hover:stroke-[#d4f600] opacity-90 transform group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               </div>
             </div>
 
@@ -256,7 +265,7 @@ export default function App() {
                 Live Demo <ArrowUpRight className="w-3 h-3" />
               </a>
               <div className="w-full flex justify-center mt-auto">
-                 <span className="text-5xl drop-shadow-2xl opacity-90 transform group-hover:scale-110 transition-transform duration-500">🚌</span>
+                 <BusFront className="w-16 h-16 drop-shadow-2xl stroke-zinc-400 group-hover:stroke-[#d4f600] opacity-90 transform group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               </div>
             </div>
           </div>
@@ -265,7 +274,7 @@ export default function App() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Expenses Tracker */}
             <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
-              <span className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-500 origin-left">💰</span>
+              <Wallet className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
               <div className="text-blue-400 text-xs font-medium mb-1">Python</div>
               <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Expenses Tracker</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
@@ -278,7 +287,7 @@ export default function App() {
 
             {/* Video Upscaler */}
             <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
-              <span className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-500 origin-left">🎬</span>
+              <Video className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
               <div className="text-blue-400 text-xs font-medium mb-1">Mixed</div>
               <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Video Upscaler</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
@@ -291,7 +300,7 @@ export default function App() {
 
             {/* Anime Grabber */}
             <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
-              <span className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-500 origin-left">🎌</span>
+              <Tv className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
               <div className="text-blue-400 text-xs font-medium mb-1">Mixed</div>
               <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Anime Grabber</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
@@ -304,7 +313,7 @@ export default function App() {
 
             {/* Serverless Poll */}
             <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
-              <span className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-500 origin-left">🗳️</span>
+              <Vote className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
               <div className="text-blue-400 text-xs font-medium mb-1">AWS</div>
               <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Serverless Poll</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
@@ -339,14 +348,14 @@ export default function App() {
                 </p>
               </div>
               <div className="md:w-2/5 bg-[#121212] flex items-center justify-center p-12 min-h-[250px] border-b md:border-b-0 md:border-l border-white/5">
-                <span className="text-8xl drop-shadow-2xl opacity-90 transform hover:scale-110 transition-transform duration-500">🎓</span>
+                 <GraduationCap className="w-24 h-24 drop-shadow-2xl stroke-zinc-400 hover:stroke-[#d4f600] opacity-90 transform hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               </div>
             </div>
 
             {/* High School */}
             <div className="bg-[#151515] border border-white/5 rounded-[2rem] flex flex-col md:flex-row shadow-2xl overflow-hidden hover:border-[#d4f600]/20 transition-colors">
               <div className="md:w-2/5 bg-[#121212] flex items-center justify-center p-12 min-h-[250px] border-b md:border-b-0 md:border-r border-white/5">
-                 <span className="text-8xl drop-shadow-2xl opacity-90 transform hover:scale-110 transition-transform duration-500">📚</span>
+                 <BookOpen className="w-24 h-24 drop-shadow-2xl stroke-zinc-400 hover:stroke-[#d4f600] opacity-90 transform hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               </div>
               <div className="p-8 md:p-12 md:w-3/5 flex flex-col justify-center">
                 <div className="flex flex-wrap gap-2 mb-6">
