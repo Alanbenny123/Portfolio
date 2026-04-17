@@ -1,650 +1,487 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import { motion } from "motion/react";
-import emailjs from "@emailjs/browser";
-import { useState, useRef } from "react";
+import { motion } from 'motion/react';
 import { 
-  Github, 
-  Linkedin, 
-  Twitter, 
-  Mail, 
-  Code2, 
-  Database, 
-  Cpu, 
-  Globe, 
-  Zap, 
-  Smartphone, 
-  Layout, 
-  Layers,
-  ArrowUpRight,
-  CheckCircle2,
+  ArrowUpRight, 
+  Settings, 
+  MonitorSmartphone, 
+  Lightbulb, 
+  Rocket,
   Cloud,
-  Terminal,
-  BrainCircuit,
-  Send,
-  Loader2
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
+  Code2,
+  ShieldCheck,
+  Cpu,
+  Github,
+  Linkedin,
+  Mail
+} from 'lucide-react';
 
-const Navbar = () => (
-  <motion.nav 
-    initial={{ y: -100, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl"
-  >
-    <div className="glass rounded-full px-6 py-3 flex items-center justify-between">
-      <div className="flex items-center gap-2">
-        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-          <Code2 className="w-4 h-4 text-white" />
-        </div>
-        <span className="font-display font-bold text-lg">Alan Benny</span>
-      </div>
-      <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-        <a href="#about" className="hover:text-primary transition-colors">About Me</a>
-        <a href="#experience" className="hover:text-primary transition-colors">Education</a>
-        <a href="#services" className="hover:text-primary transition-colors">Skills</a>
-      </div>
-      <a href="mailto:alanbenny1357@gmail.com">
-        <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90">
-          Contact Me
-        </Button>
-      </a>
-    </div>
-  </motion.nav>
-);
-
-const Hero = () => (
-  <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-    <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-      <motion.div
-        initial={{ x: -50, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <h1 className="text-6xl md:text-8xl font-display font-extrabold mb-6 leading-tight">
-          Hello, <br />
-          <span className="text-muted-foreground">I am</span> <br />
-          <span className="text-gradient">Alan Benny</span>
-        </h1>
-        <p className="text-lg text-muted-foreground max-w-md mb-8">
-          B.Tech CS (AI) student delivering innovative, AI-driven solutions to transform ideas into reality.
-        </p>
-        <div className="flex flex-col gap-4">
-          {['IT Engineer', 'Web Developer', 'AI Developer'].map((role) => (
-            <div key={role} className="flex items-center gap-4 group">
-              <div className="w-12 h-[1px] bg-muted-foreground group-hover:w-16 group-hover:bg-primary transition-all" />
-              <span className="text-xl font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-                {role}
-              </span>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative"
-      >
-        <div className="relative z-10 w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden border-4 border-primary/20">
-          <img 
-            src="/profile.png"
-            alt="Alan Benny"
-            className="w-full h-full object-cover object-top"
-          />
-        </div>
-        
-        {/* Floating Icons */}
-        <motion.div 
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="absolute -top-4 -right-4 z-20 glass p-3 rounded-xl"
-        >
-          <Github className="w-6 h-6 text-primary" />
-        </motion.div>
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 5, repeat: Infinity, delay: 0.5 }}
-          className="absolute top-1/2 -left-8 z-20 glass p-3 rounded-xl"
-        >
-          <Linkedin className="w-6 h-6 text-primary" />
-        </motion.div>
-        <motion.div 
-          animate={{ y: [0, -15, 0] }}
-          transition={{ duration: 6, repeat: Infinity, delay: 1 }}
-          className="absolute bottom-12 -right-8 z-20 glass p-3 rounded-xl"
-        >
-          <BrainCircuit className="w-6 h-6 text-primary" />
-        </motion.div>
-        
-        {/* Background Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/10 blur-[120px] rounded-full -z-10" />
-      </motion.div>
-    </div>
-  </section>
-);
-
-const AboutMe = () => (
-  <section id="about" className="py-20 px-6 bg-muted/30">
-    <div className="max-w-7xl mx-auto">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 className="text-4xl font-display font-bold mb-6">About Me</h2>
-          <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-            I'm Alan Benny, a B.Tech Computer Science student specializing in Artificial Intelligence at Adi Shankara Institute of Engineering and Technology (2022–2026). I'm passionate about creating AI-driven solutions, innovative web applications, and solving real-world problems through code.
-          </p>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <Card className="glass border-none">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                  <Globe className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold mb-1">Web Development</h4>
-                  <p className="text-xs text-muted-foreground">React, TypeScript, Next.js, Vercel</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="glass border-none">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-accent/10 text-accent">
-                  <Terminal className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold mb-1">Programming</h4>
-                  <p className="text-xs text-muted-foreground">Python, JavaScript, TypeScript, HTML/CSS</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-4">
-            <div className="h-48 rounded-2xl overflow-hidden bg-primary/10 flex items-center justify-center">
-              <BrainCircuit className="w-16 h-16 text-primary/40" />
-            </div>
-            <div className="h-64 rounded-2xl overflow-hidden bg-muted/50 flex items-center justify-center">
-              <Code2 className="w-16 h-16 text-primary/30" />
-            </div>
-          </div>
-          <div className="space-y-4 pt-8">
-            <div className="h-64 rounded-2xl overflow-hidden bg-muted/50 flex items-center justify-center">
-              <Database className="w-16 h-16 text-primary/30" />
-            </div>
-            <div className="h-48 rounded-2xl overflow-hidden bg-primary/10 flex items-center justify-center">
-              <Cloud className="w-16 h-16 text-primary/40" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-const Experience = () => (
-  <section id="experience" className="py-20 px-6">
-    <div className="max-w-7xl mx-auto">
-      <h2 className="text-4xl font-display font-bold mb-12 text-center">Education & Highlights</h2>
-      <div className="space-y-12">
-        {[
-          {
-            title: "B.Tech in Computer Science (Artificial Intelligence)",
-            company: "Adi Shankara Institute of Engineering and Technology",
-            period: "2022 – 2026",
-            tags: ["AI/ML", "Web Dev"],
-            description: "Specialized in Artificial Intelligence with coursework in Machine Learning, Computer Vision, Data Structures, Software Engineering, and Web Development. Built multiple production-ready projects during this period.",
-            icon: "🎓"
-          },
-          {
-            title: "Higher Secondary Education (CBSE)",
-            company: "Sree Sarada Vidyalaya, Kalady, Kerala",
-            period: "2020 – 2022",
-            tags: ["Science", "Programming"],
-            description: "Completed higher secondary education with a focus on Science. Developed a strong foundation in mathematics and logical thinking that fuels my software development approach today.",
-            icon: "📚"
-          }
-        ].map((exp, i) => (
-          <motion.div
-            key={i}
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.2 }}
-            className="group grid md:grid-cols-2 gap-8 items-center glass p-8 rounded-3xl"
-          >
-            <div className={i % 2 === 1 ? "md:order-2" : ""}>
-              <div className="flex items-center gap-3 mb-4">
-                <Badge variant="outline" className="text-primary border-primary/20">{exp.period}</Badge>
-                {exp.tags.map(tag => <Badge key={tag} className="bg-muted text-muted-foreground">{tag}</Badge>)}
-              </div>
-              <h3 className="text-2xl font-bold mb-2">{exp.title}</h3>
-              <p className="text-primary font-medium mb-4">{exp.company}</p>
-              <p className="text-muted-foreground mb-6 leading-relaxed">{exp.description}</p>
-            </div>
-            <div className={`rounded-2xl h-64 bg-muted/30 flex items-center justify-center text-8xl ${i % 2 === 1 ? "md:order-1" : ""}`}>
-              {exp.icon}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-const Skills = () => (
-  <section className="py-20 px-6 bg-muted/30">
-    <div className="max-w-7xl mx-auto text-center">
-      <h2 className="text-4xl font-display font-bold mb-16">My Skills and Development</h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[
-          { icon: Zap, title: "Fast", desc: "Optimized code and efficient algorithms ensure fast load times and lag-free interactions across all platforms." },
-          { icon: Smartphone, title: "Responsive", desc: "Mobile-first design approach ensuring seamless experience across all devices and screen sizes." },
-          { icon: Layout, title: "Intuitive", desc: "User-centered design with clean interfaces, smooth UX and intuitive navigation built with React." },
-          { icon: Layers, title: "Dynamic", desc: "Interactive AI-powered applications built with modern frameworks like React, Next.js and Python." }
-        ].map((skill, i) => (
-          <Card key={i} className="glass border-none hover:bg-primary/5 transition-colors group">
-            <CardContent className="p-8">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-                <skill.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">{skill.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{skill.desc}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-const Projects = () => (
-  <section className="py-20 px-6">
-    <div className="max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-        <div>
-          <h2 className="text-4xl font-display font-bold mb-4">My Recent Projects</h2>
-          <p className="text-muted-foreground max-w-md">
-            Innovative AI-driven and web solutions built with real-world impact.
-          </p>
-        </div>
-        <a href="https://github.com/Alanbenny123" target="_blank" rel="noopener noreferrer">
-          <Button variant="outline" className="rounded-full">View All on GitHub</Button>
-        </a>
-      </div>
-      
-      <div className="grid md:grid-cols-3 gap-6">
-        {/* Featured project */}
-        <div className="md:col-span-2 glass rounded-3xl overflow-hidden group">
-          <div className="p-8">
-            <Badge className="mb-4 bg-primary/20 text-primary border-none">Python · AI/ML</Badge>
-            <h3 className="text-3xl font-bold mb-4">Student Behaviour Analysis</h3>
-            <p className="text-muted-foreground mb-6 max-w-lg">
-              AI-powered system for analyzing student behavior patterns using machine learning and computer vision. Helps educators identify students who need support.
-            </p>
-            <div className="flex gap-3 flex-wrap">
-              <a href="https://github.com/Alanbenny123/Student_Behaviour_Analysis" target="_blank" rel="noopener noreferrer">
-                <Button className="rounded-full">
-                  <Github className="w-4 h-4 mr-2" /> View Code
-                </Button>
-              </a>
-            </div>
-          </div>
-          <div className="px-8 pb-0 h-48 bg-primary/5 flex items-center justify-center text-8xl">
-            📊
-          </div>
-        </div>
-        
-        {/* Side projects */}
-        <div className="space-y-6">
-          {[
-            {
-              name: "Insta Grabber",
-              desc: "Instagram reels & photos downloader without watermark.",
-              emoji: "📸",
-              live: "https://insta-grabber-black.vercel.app/",
-              lang: "TypeScript"
-            },
-            {
-              name: "Bus Tracker",
-              desc: "Real-time bus tracking application.",
-              emoji: "🚌",
-              live: "https://bustracker-pi.vercel.app/",
-              lang: "TypeScript"
-            }
-          ].map((proj) => (
-            <div key={proj.name} className="glass rounded-3xl overflow-hidden group">
-              <div className="p-6">
-                <Badge className="mb-2 bg-muted text-muted-foreground border-none text-xs">{proj.lang}</Badge>
-                <h4 className="font-bold mb-2">{proj.name}</h4>
-                <p className="text-sm text-muted-foreground mb-4">{proj.desc}</p>
-                <a href={proj.live} target="_blank" rel="noopener noreferrer" className="text-primary text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                  Live Demo <ArrowUpRight className="w-3 h-3" />
-                </a>
-              </div>
-              <div className="h-24 bg-muted/20 flex items-center justify-center text-5xl group-hover:scale-110 transition-transform">
-                {proj.emoji}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* More projects row */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-        {[
-          { name: "Expenses Tracker", desc: "GUI-based personal finance tracker.", emoji: "💰", live: "https://trackmyrupees.streamlit.app/", lang: "Python" },
-          { name: "Video Upscaler", desc: "AI-powered video upscaling application.", emoji: "🎬", live: "https://video-upscaler.vercel.app/", lang: "Mixed" },
-          { name: "Anime Grabber", desc: "Anime content grabber application.", emoji: "🎌", live: "https://anime-grabber.vercel.app/", lang: "Mixed" },
-          { name: "Serverless Poll", desc: "Real-time serverless polling app on AWS.", emoji: "🗳️", live: "http://polling-app-frontend-905418437059.s3-website-us-east-1.amazonaws.com/", lang: "AWS" },
-        ].map((proj) => (
-          <Card key={proj.name} className="glass border-none group hover:bg-primary/5 transition-colors">
-            <CardContent className="p-6">
-              <div className="text-4xl mb-4">{proj.emoji}</div>
-              <Badge className="mb-3 bg-muted text-muted-foreground border-none text-xs">{proj.lang}</Badge>
-              <h4 className="font-bold mb-2">{proj.name}</h4>
-              <p className="text-xs text-muted-foreground mb-4">{proj.desc}</p>
-              <a href={proj.live} target="_blank" rel="noopener noreferrer" className="text-primary text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                Live <ArrowUpRight className="w-3 h-3" />
-              </a>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-const Services = () => (
-  <section id="services" className="py-20 px-6 bg-muted/30">
-    <div className="max-w-7xl mx-auto">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-display font-bold mb-4">Skills & Expertise</h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          Combining AI, web development, and software engineering to build impactful solutions.
-        </p>
-      </div>
-      
-      <div className="grid md:grid-cols-2 gap-6">
-        {[
-          { 
-            icon: BrainCircuit, 
-            title: "AI & Machine Learning", 
-            features: ["Computer Vision & Image Processing", "ML model training and deployment", "Student behavior analysis with AI"] 
-          },
-          { 
-            icon: Globe, 
-            title: "Web Development", 
-            features: ["React.js, Next.js, TypeScript", "Full-stack applications", "Deployed on Vercel, AWS, Streamlit"] 
-          },
-          { 
-            icon: Cpu, 
-            title: "Python Development", 
-            features: ["Data analysis and visualization", "Automation scripting", "GUI applications with Tkinter"] 
-          },
-          { 
-            icon: Cloud, 
-            title: "Cloud & DevOps", 
-            features: ["AWS S3, Lambda, API Gateway", "Docker containerization", "GitHub Actions CI/CD pipelines"] 
-          }
-        ].map((service, i) => (
-          <Card key={i} className="glass border-none p-8 hover:translate-y-[-4px] transition-all">
-            <div className="flex items-start gap-6">
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                <service.icon className="w-7 h-7" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-                <ul className="space-y-3">
-                  {service.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-// ─── EmailJS config — fill these in after setting up emailjs.com ───
-const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
-
-const Contact = () => {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!formRef.current) return;
-    setStatus("sending");
-    try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        { publicKey: EMAILJS_PUBLIC_KEY }
-      );
-      setStatus("success");
-      formRef.current.reset();
-    } catch {
-      setStatus("error");
-    }
-  };
-
-  return (
-    <section id="contact" className="py-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left */}
-          <div>
-            <h2 className="text-4xl font-display font-bold mb-4">Get In Touch</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              I'm always open to discussing new projects, creative ideas, or opportunities to collaborate. Drop me a message and I'll get back to you!
-            </p>
-            <div className="space-y-4">
-              <a href="mailto:alanbenny1357@gmail.com" className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Email</p>
-                  <p className="font-medium group-hover:text-primary transition-colors">alanbenny1357@gmail.com</p>
-                </div>
-              </a>
-              <a href="https://github.com/Alanbenny123" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                  <Github className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">GitHub</p>
-                  <p className="font-medium group-hover:text-primary transition-colors">github.com/Alanbenny123</p>
-                </div>
-              </a>
-              <a href="https://www.linkedin.com/in/alan-benny-7b8601292" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                  <Linkedin className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">LinkedIn</p>
-                  <p className="font-medium group-hover:text-primary transition-colors">Alan Benny</p>
-                </div>
-              </a>
-              <a href="https://x.com/Alan_Benny199" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                  <Twitter className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Twitter / X</p>
-                  <p className="font-medium group-hover:text-primary transition-colors">@Alan_Benny199</p>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          {/* Right — form */}
-          <div className="glass p-8 rounded-3xl">
-            {status === "success" ? (
-              <div className="flex flex-col items-center justify-center h-full py-12 text-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <CheckCircle2 className="w-8 h-8 text-green-500" />
-                </div>
-                <h3 className="text-2xl font-bold">Message Sent!</h3>
-                <p className="text-muted-foreground">Thanks for reaching out. I'll get back to you soon.</p>
-                <Button variant="outline" className="rounded-xl mt-2" onClick={() => setStatus("idle")}>
-                  Send Another
-                </Button>
-              </div>
-            ) : (
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-muted-foreground">Your Name</label>
-                  <input
-                    name="from_name"
-                    required
-                    placeholder="John Doe"
-                    className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-white/5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-muted-foreground">Your Email</label>
-                  <input
-                    name="from_email"
-                    type="email"
-                    required
-                    placeholder="john@example.com"
-                    className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-white/5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-muted-foreground">Message</label>
-                  <textarea
-                    name="message"
-                    required
-                    rows={5}
-                    placeholder="Tell me about your project..."
-                    className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-white/5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                  />
-                </div>
-                {status === "error" && (
-                  <p className="text-red-400 text-sm">Something went wrong. Please try again.</p>
-                )}
-                <Button type="submit" disabled={status === "sending"} className="w-full rounded-xl gap-2">
-                  {status === "sending"
-                    ? <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</>
-                    : <><Send className="w-4 h-4" /> Send Message</>}
-                </Button>
-              </form>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Footer = () => (
-  <footer className="pt-20 pb-10 px-6 bg-muted/30 border-t">
-    <div className="max-w-7xl mx-auto">
-      <div className="grid md:grid-cols-4 gap-12 mb-16">
-        <div className="md:col-span-1">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-              <Code2 className="w-4 h-4 text-white" />
-            </div>
-            <span className="font-display font-bold text-xl">Alan Benny</span>
-          </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            B.Tech CS (AI) student passionate about building innovative AI-driven solutions and modern web applications.
-          </p>
-        </div>
-        
-        <div>
-          <h4 className="font-bold mb-6">Quick Links</h4>
-          <ul className="space-y-4 text-sm text-muted-foreground">
-            <li><a href="#" className="hover:text-primary transition-colors">Home</a></li>
-            <li><a href="#about" className="hover:text-primary transition-colors">About Me</a></li>
-            <li><a href="#experience" className="hover:text-primary transition-colors">Education</a></li>
-            <li><a href="#services" className="hover:text-primary transition-colors">Skills</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 className="font-bold mb-6">Social Media</h4>
-          <ul className="space-y-4 text-sm text-muted-foreground">
-            <li>
-              <a href="https://x.com/Alan_Benny199" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
-                Twitter <ArrowUpRight className="w-3 h-3" />
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/alan-benny-7b8601292" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
-                LinkedIn <ArrowUpRight className="w-3 h-3" />
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/Alanbenny123" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
-                GitHub <ArrowUpRight className="w-3 h-3" />
-              </a>
-            </li>
-            <li>
-              <a href="mailto:alanbenny1357@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
-                Email <ArrowUpRight className="w-3 h-3" />
-              </a>
-            </li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 className="font-bold mb-6">Get In Touch</h4>
-          <p className="text-sm text-muted-foreground mb-4">Have a project in mind? Let's talk!</p>
-          <a href="mailto:alanbenny1357@gmail.com">
-            <Button className="rounded-full w-full">Send a Message</Button>
-          </a>
-        </div>
-      </div>
-      
-      <div className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-        <p>© 2025 Alan Benny. Built with React & Vite.</p>
-        <div className="flex gap-6">
-          <a href="https://github.com/Alanbenny123" target="_blank" rel="noopener noreferrer" className="hover:text-primary">GitHub</a>
-          <a href="mailto:alanbenny1357@gmail.com" className="hover:text-primary">alanbenny1357@gmail.com</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+const XLogo = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
 );
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary/30">
-      <Navbar />
-      <main>
-        <Hero />
-        <AboutMe />
-        <Experience />
-        <Skills />
-        <Projects />
-        <Services />
-        <Contact />
+    <div className="min-h-screen bg-[#0c0c0c] text-zinc-300 font-sans selection:bg-[#d4f600]/30 selection:text-white overflow-hidden relative">
+      
+      {/* Background Glows - Neon Lime Accent */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#d4f600]/5 blur-[150px] rounded-full mix-blend-screen" />
+        <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-[#d4f600]/5 blur-[150px] rounded-full mix-blend-screen" />
+      </div>
+
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full z-50 glass-panel">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="w-8 h-8 rounded-lg bg-[#d4f600] flex items-center justify-center shadow-lg shadow-[#d4f600]/20">
+            <Rocket className="w-4 h-4 text-black" />
+          </div>
+          
+          <div className="hidden md:flex items-center gap-8 bg-[#151515] rounded-full px-8 py-3 border border-white/10 shadow-xl">
+            <a href="#about" className="text-xs tracking-wider uppercase font-bold hover:text-white transition-colors text-[#d4f600]">About Me</a>
+            <a href="#projects" className="text-xs tracking-wider uppercase font-semibold text-zinc-500 hover:text-white transition-colors">Projects</a>
+            <a href="#education" className="text-xs tracking-wider uppercase font-semibold text-zinc-500 hover:text-white transition-colors">Education</a>
+            <a href="#skills" className="text-xs tracking-wider uppercase font-semibold text-zinc-500 hover:text-white transition-colors">Skills</a>
+          </div>
+
+          <a href="#contact" className="bg-[#d4f600] hover:bg-[#bde000] transition-all text-black px-7 py-2.5 rounded-full text-sm font-semibold shadow-[0_0_20px_rgba(212,246,0,0.2)] inline-block">
+            Contact Me
+          </a>
+        </div>
+      </nav>
+
+      <main className="pt-32 pb-20 relative z-10">
+        {/* Hero Section */}
+        <section className="relative max-w-7xl mx-auto px-6 pt-12 pb-32 flex flex-col items-center">
+          
+          <div className="w-full flex-col md:flex-row flex justify-between items-start md:items-center relative">
+            {/* Left Top */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="z-10"
+            >
+              <h1 className="text-6xl md:text-[7rem] leading-none font-display font-bold text-white tracking-tighter mb-4">
+                Hello,
+              </h1>
+              <p className="text-zinc-400 max-w-xs text-sm leading-relaxed font-light">
+                Delivering efficient, scalable solutions to transform your tech vision into reality
+              </p>
+            </motion.div>
+
+            {/* Right Top */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="z-10 text-right mt-12 md:mt-0"
+            >
+              <h2 className="text-4xl md:text-6xl font-display font-bold text-white leading-tight tracking-tighter">
+                I am <br />
+                <span className="text-gradient">Alan Benny</span>
+              </h2>
+            </motion.div>
+          </div>
+
+          {/* Center Image & Nodes */}
+          <div className="relative w-full flex justify-center mt-16 md:-mt-24 z-10">
+             {/* Custom Node Connections */}
+             <div className="absolute top-1/4 left-[20%] w-[50%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent hidden lg:block" />
+             
+             {/* MOVED DOWN to top-[45%] per user request */}
+             <div className="absolute top-[45%] right-0 xl:right-[5%] hidden lg:flex flex-col items-end gap-6 w-full lg:w-auto overflow-visible z-20">
+                <a href="https://github.com/Alanbenny123" target="_blank" rel="noreferrer" className="p-3 rounded-xl bento-card text-zinc-400 hover:text-black hover:bg-[#d4f600] transition-all duration-300 shadow-xl relative group hover:scale-110 cursor-pointer border hover:border-[#d4f600]">
+                  <Github className="w-5 h-5 relative z-10" />
+                  <div className="absolute right-full top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-l from-[#d4f600]/60 to-transparent transition-all duration-300 group-hover:from-[#d4f600] group-hover:shadow-[0_0_12px_#d4f600] w-[80px] lg:w-[150px] xl:w-[250px]" />
+                </a>
+                
+                <a href="https://www.linkedin.com/in/alan-benny-7b8601292" target="_blank" rel="noreferrer" className="p-3 rounded-xl bento-card text-zinc-400 hover:text-black hover:bg-[#d4f600] transition-all duration-300 shadow-xl relative mr-12 group hover:scale-110 cursor-pointer border hover:border-[#d4f600]">
+                  <Linkedin className="w-5 h-5 relative z-10" />
+                  <div className="absolute right-full top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-l from-[#d4f600]/60 to-transparent transition-all duration-300 group-hover:from-[#d4f600] group-hover:shadow-[0_0_12px_#d4f600] w-[80px] lg:w-[150px] xl:w-[250px]" />
+                </a>
+
+                <a href="https://x.com/Alan_Benny199" target="_blank" rel="noreferrer" className="p-3 rounded-xl bento-card text-zinc-400 hover:text-black hover:bg-[#d4f600] transition-all duration-300 shadow-xl relative mr-24 group hover:scale-110 cursor-pointer border hover:border-[#d4f600]">
+                  <XLogo className="w-5 h-5 relative z-10" />
+                  <div className="absolute right-full top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-l from-[#d4f600]/60 to-transparent transition-all duration-300 group-hover:from-[#d4f600] group-hover:shadow-[0_0_12px_#d4f600] w-[80px] lg:w-[150px] xl:w-[250px]" />
+                </a>
+             </div>
+
+             {/* Stacked Roles */}
+             <div className="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-6 hidden md:flex">
+               {['AI/ML Engineer', 'Web Dev', 'CS Student'].map((role, i) => (
+                 <div key={i} className="flex items-center gap-4 w-48 group cursor-pointer">
+                   <div className="text-xs uppercase tracking-widest font-medium text-white transition-colors group-hover:text-[#d4f600]">{role}</div>
+                   <div className="flex-1 h-[1px] bg-white/10 relative transition-colors group-hover:bg-[#d4f600]">
+                     <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-zinc-500 rounded-full transition-colors group-hover:bg-[#d4f600]"></div>
+                   </div>
+                 </div>
+               ))}
+             </div>
+
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="relative w-[340px] h-[400px] z-10"
+            >
+              <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-b from-[#d4f600]/30 to-transparent p-[1px]">
+                 <div className="w-full h-full rounded-[2.5rem] bg-[#0c0c0c] overflow-hidden relative">
+                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0c0c0c] z-10" />
+                   <img 
+                     src="/profile.png" 
+                     alt="Alan Benny" 
+                     className="w-full h-full object-cover object-top grayscale hover:grayscale-[0.2] transition-all duration-700 opacity-80"
+                   />
+                 </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* About Me Bento */}
+        <section id="about" className="max-w-7xl mx-auto px-6 mb-32">
+          <motion.div 
+            initial={{ y: 40, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="bento-card rounded-[2.5rem] p-10 md:p-14 flex flex-col lg:flex-row gap-16 items-center relative overflow-hidden group"
+          >
+            <div className="absolute right-0 top-0 w-[400px] h-[400px] bg-[#d4f600]/5 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            
+            <div className="lg:w-[45%] z-10">
+              <h3 className="text-4xl md:text-5xl font-display font-medium text-white mb-6 tracking-tight">About Me</h3>
+              <p className="text-zinc-400 leading-relaxed font-light mb-8 text-sm md:text-base">
+                I'm Alan Benny, a B.Tech Computer Science student specializing in Artificial Intelligence. I build efficient web apps, AI-powered tools, and open source projects — passionate about solving real-world problems through code.
+              </p>
+            </div>
+            
+            <div className="lg:w-[55%] flex flex-col gap-5 w-full z-10">
+              <div className="bg-[#1a1a1a] p-5 rounded-[1.5rem] border border-[#d4f600]/10 flex items-center gap-6 group/card hover:bg-[#202020] hover:border-[#d4f600]/30 transition-colors cursor-pointer">
+                <div className="w-12 h-12 rounded-2xl bg-[#d4f600] flex items-center justify-center shrink-0">
+                  <div className="w-5 h-5 rounded-[6px] bg-[#0c0c0c]" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-zinc-300 font-medium leading-relaxed group-hover/card:text-white transition-colors">
+                    Build fast, modern web apps with React, Vite, and Tailwind CSS.
+                  </p>
+                </div>
+                <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center shrink-0 group-hover/card:bg-[#d4f600] group-hover/card:border-[#d4f600] group-hover/card:text-black transition-all">
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="bg-[#1a1a1a] p-5 rounded-[1.5rem] border border-[#d4f600]/10 flex items-center gap-6 group/card hover:bg-[#202020] hover:border-[#d4f600]/30 transition-colors cursor-pointer">
+                <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover/card:bg-[#d4f600] transition-colors">
+                  <div className="grid grid-cols-2 gap-1 w-5 h-5">
+                    <div className="bg-[#c0c0c0] group-hover/card:bg-[#0c0c0c] rounded-sm transition-colors" />
+                    <div className="bg-[#c0c0c0] group-hover/card:bg-[#0c0c0c] rounded-sm opacity-50 transition-colors" />
+                    <div className="bg-[#c0c0c0] group-hover/card:bg-[#0c0c0c] rounded-sm opacity-50 transition-colors" />
+                    <div className="bg-[#c0c0c0] group-hover/card:bg-[#0c0c0c] rounded-sm transition-colors" />
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-zinc-300 font-medium leading-relaxed group-hover/card:text-white transition-colors">
+                    Python, JavaScript, TypeScript — AI/ML, computer vision, and full-stack development.
+                  </p>
+                </div>
+                <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center shrink-0 group-hover/card:bg-[#d4f600] group-hover/card:border-[#d4f600] group-hover/card:text-black transition-all">
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Project Showcase */}
+        <section id="projects" className="max-w-7xl mx-auto px-6 mb-32">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+            <div>
+              <h3 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tight mb-4">
+                My Recent Projects
+              </h3>
+              <p className="text-zinc-400 text-sm max-w-md leading-relaxed">
+                Innovative AI-driven and web solutions built with real-world impact.
+              </p>
+            </div>
+            <a href="https://github.com/Alanbenny123" target="_blank" rel="noreferrer" className="px-5 py-2.5 rounded-full border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-white text-sm font-medium transition-all flex items-center gap-2">
+              View All on GitHub
+            </a>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+            {/* Large Card - Student Behaviour Analysis */}
+            <div className="lg:col-span-2 row-span-2 bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-8 md:p-10 flex flex-col justify-between group transition-colors">
+              <div>
+                <div className="bg-[#d4f600]/10 text-[#d4f600] px-3 py-1 rounded-full text-xs font-medium w-fit mb-4">
+                  Python - AI/ML
+                </div>
+                <h4 className="text-3xl font-bold text-white mb-3 group-hover:text-[#d4f600] transition-colors">Student Behaviour Analysis</h4>
+                <p className="text-zinc-400 text-sm leading-relaxed max-w-lg mb-6">
+                  AI-powered system for analyzing student behavior patterns using machine learning and computer vision. Helps educators identify students who need support.
+                </p>
+                <a href="https://github.com/Alanbenny123/Student_Behaviour_Analysis" target="_blank" rel="noreferrer" className="bg-[#d4f600] hover:bg-[#bde000] text-black px-5 py-2.5 rounded-full text-sm font-medium w-fit flex items-center gap-2 transition-colors">
+                  <Github className="w-4 h-4" />
+                  View Code
+                </a>
+              </div>
+              <div className="mt-12 w-full h-48 bg-[#1a1a1a] rounded-xl border border-white/5 flex items-center justify-center group-hover:border-[#d4f600]/20 transition-colors relative overflow-hidden">
+                 <span className="text-7xl drop-shadow-2xl opacity-90 transform group-hover:scale-110 transition-transform duration-500">📊</span>
+              </div>
+            </div>
+
+            {/* Insta Grabber */}
+            <div className="col-span-1 bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-8 flex flex-col group transition-colors">
+              <div className="text-blue-400 text-xs font-medium mb-2">TypeScript</div>
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Insta Grabber</h4>
+              <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
+                Instagram reels & photos downloader without watermark.
+              </p>
+              <a href="https://insta-grabber-black.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mb-8 transition-colors">
+                Live Demo <ArrowUpRight className="w-3 h-3" />
+              </a>
+              <div className="w-full flex justify-center mt-auto">
+                 <span className="text-5xl drop-shadow-2xl opacity-90 transform group-hover:scale-110 transition-transform duration-500">📸</span>
+              </div>
+            </div>
+
+            {/* Bus Tracker */}
+            <div className="col-span-1 bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-8 flex flex-col group transition-colors">
+              <div className="text-blue-400 text-xs font-medium mb-2">TypeScript</div>
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Bus Tracker</h4>
+              <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
+                Real-time bus tracking application.
+              </p>
+              <a href="https://bustracker-pi.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mb-8 transition-colors">
+                Live Demo <ArrowUpRight className="w-3 h-3" />
+              </a>
+              <div className="w-full flex justify-center mt-auto">
+                 <span className="text-5xl drop-shadow-2xl opacity-90 transform group-hover:scale-110 transition-transform duration-500">🚌</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom 4 Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Expenses Tracker */}
+            <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
+              <span className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-500 origin-left">💰</span>
+              <div className="text-blue-400 text-xs font-medium mb-1">Python</div>
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Expenses Tracker</h4>
+              <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
+                GUI-based personal finance tracker.
+              </p>
+              <a href="https://trackmyrupees.streamlit.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
+                Live <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
+
+            {/* Video Upscaler */}
+            <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
+              <span className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-500 origin-left">🎬</span>
+              <div className="text-blue-400 text-xs font-medium mb-1">Mixed</div>
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Video Upscaler</h4>
+              <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
+                AI-powered video upscaling application.
+              </p>
+              <a href="https://video-upscaler.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
+                Live <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
+
+            {/* Anime Grabber */}
+            <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
+              <span className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-500 origin-left">🎌</span>
+              <div className="text-blue-400 text-xs font-medium mb-1">Mixed</div>
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Anime Grabber</h4>
+              <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
+                Anime content grabber application.
+              </p>
+              <a href="https://anime-grabber.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
+                Live <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
+
+            {/* Serverless Poll */}
+            <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
+              <span className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-500 origin-left">🗳️</span>
+              <div className="text-blue-400 text-xs font-medium mb-1">AWS</div>
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Serverless Poll</h4>
+              <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
+                Real-time serverless polling app on AWS.
+              </p>
+              <a href="http://polling-app-frontend-905418437059.s3-website-us-east-1.amazonaws.com/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
+                Live <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Education & Highlights */}
+        <section id="education" className="max-w-5xl mx-auto px-6 mb-32 flex flex-col items-center">
+          <h3 className="text-4xl md:text-5xl font-display font-bold text-white text-center mb-16 tracking-tight">
+            Education & Highlights
+          </h3>
+
+          <div className="w-full flex flex-col gap-6">
+            {/* B.Tech */}
+            <div className="bg-[#151515] border border-white/5 rounded-[2rem] flex flex-col-reverse md:flex-row shadow-2xl overflow-hidden hover:border-[#d4f600]/20 transition-colors">
+              <div className="p-8 md:p-12 md:w-3/5 flex flex-col justify-center">
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="px-3 py-1 rounded-full border border-[#d4f600]/20 text-[#d4f600] bg-[#d4f600]/5 text-xs font-mono font-medium tracking-wider">2022 – 2026</span>
+                  <span className="px-3 py-1 rounded-full border border-white/5 text-zinc-400 bg-white/5 text-xs font-mono font-medium tracking-wider">AI/ML</span>
+                  <span className="px-3 py-1 rounded-full border border-white/5 text-zinc-400 bg-white/5 text-xs font-mono font-medium tracking-wider">Web Dev</span>
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-2">B.Tech in Computer Science (Artificial Intelligence)</h4>
+                <p className="text-[#d4f600] mb-6 text-sm font-medium">Adi Shankara Institute of Engineering and Technology</p>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed">
+                  Specialized in Artificial Intelligence with coursework in Machine Learning, Computer Vision, Data Structures, Software Engineering, and Web Development. Built multiple production-ready projects during this period.
+                </p>
+              </div>
+              <div className="md:w-2/5 bg-[#121212] flex items-center justify-center p-12 min-h-[250px] border-b md:border-b-0 md:border-l border-white/5">
+                <span className="text-8xl drop-shadow-2xl opacity-90 transform hover:scale-110 transition-transform duration-500">🎓</span>
+              </div>
+            </div>
+
+            {/* High School */}
+            <div className="bg-[#151515] border border-white/5 rounded-[2rem] flex flex-col md:flex-row shadow-2xl overflow-hidden hover:border-[#d4f600]/20 transition-colors">
+              <div className="md:w-2/5 bg-[#121212] flex items-center justify-center p-12 min-h-[250px] border-b md:border-b-0 md:border-r border-white/5">
+                 <span className="text-8xl drop-shadow-2xl opacity-90 transform hover:scale-110 transition-transform duration-500">📚</span>
+              </div>
+              <div className="p-8 md:p-12 md:w-3/5 flex flex-col justify-center">
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="px-3 py-1 rounded-full border border-[#d4f600]/20 text-[#d4f600] bg-[#d4f600]/5 text-xs font-mono font-medium tracking-wider">2020 – 2022</span>
+                  <span className="px-3 py-1 rounded-full border border-white/5 text-zinc-400 bg-white/5 text-xs font-mono font-medium tracking-wider">Science</span>
+                  <span className="px-3 py-1 rounded-full border border-white/5 text-zinc-400 bg-white/5 text-xs font-mono font-medium tracking-wider">Programming</span>
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-2">Higher Secondary Education (CBSE)</h4>
+                <p className="text-[#d4f600] mb-6 text-sm font-medium">Sree Sarada Vidyalaya, Kalady, Kerala</p>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed">
+                  Completed higher secondary education with a focus on Science. Developed a strong foundation in mathematics and logical thinking that fuels my software development approach today.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section id="skills" className="max-w-7xl mx-auto px-6 mb-32">
+          <h3 className="text-3xl font-display font-medium text-white text-center mb-16 tracking-tight">Let's Explore Popular<br/>Skills & Experience</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: Settings, title: "Fast", desc: "Optimal performance, ensuring quick load times and seamless user experience.", active: true },
+              { icon: MonitorSmartphone, title: "Responsive", desc: "Adaptive layouts designed to work flawlessly on any screen size from mobile to desktop." },
+              { icon: Lightbulb, title: "Intuitive", desc: "Crafting user-friendly interfaces that prioritize ease of navigation." },
+              { icon: Rocket, title: "Dynamic", desc: "Bringing web pages to life with interactive elements and modern animations." }
+            ].map((skill, i) => (
+              <motion.div 
+                whileHover={{ y: -5 }}
+                key={i} 
+                className={`p-[1px] rounded-[2rem] overflow-hidden ${skill.active ? 'bg-gradient-to-b from-[#d4f600]/40 to-transparent' : 'bg-white/5 hover:bg-white/10'} transition-all duration-300 group cursor-pointer`}
+              >
+                <div className={`h-full p-8 rounded-[2rem] ${skill.active ? 'bg-[#151515]' : 'bento-card'} flex flex-col items-start`}>
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-8 border ${skill.active ? 'bg-[#d4f600] border-[#d4f600] shadow-[0_0_15px_rgba(212,246,0,0.4)]' : 'bg-zinc-800/50 border-white/10 group-hover:border-[#d4f600]/50'} transition-all`} >
+                    <skill.icon className={`w-5 h-5 ${skill.active ? 'text-black' : 'text-zinc-400 group-hover:text-[#d4f600] transition-colors'}`} />
+                  </div>
+                  <h4 className="text-lg font-medium text-white mb-3">{skill.title}</h4>
+                  <p className="text-sm text-zinc-500 font-light leading-relaxed group-hover:text-zinc-400 transition-colors">{skill.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
       </main>
-      <Footer />
+
+      {/* Footer */}
+      <footer id="contact" className="border-t border-white/5 bg-[#0a0a0a] pt-24 pb-12 relative overflow-hidden">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#d4f600]/5 blur-[120px] rounded-t-full pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 relative z-10">
+          <div className="col-span-1 md:col-span-1 border-r border-white/5 pr-8 hidden md:block">
+            <div className="w-10 h-10 rounded-xl bg-[#d4f600] flex items-center justify-center mb-8 shadow-lg shadow-[#d4f600]/20">
+              <Rocket className="w-5 h-5 text-black" />
+            </div>
+            <p className="text-zinc-500 text-xs font-light leading-relaxed max-w-[200px]">
+              Get the latest updates, tech tips, and insights on IT solutions right in your inbox.
+            </p>
+          </div>
+          
+          <div>
+            <h5 className="text-white text-sm font-semibold mb-8 uppercase tracking-widest">Quick Links</h5>
+            <ul className="space-y-5">
+              {[
+                { name: 'About Me', href: '#about' },
+                { name: 'Projects', href: '#projects' },
+                { name: 'Education', href: '#education' },
+                { name: 'Skills', href: '#skills' }
+              ].map(link => (
+                <li key={link.name}>
+                  <a href={link.href} className="text-zinc-400 hover:text-[#d4f600] text-sm font-light transition-colors">{link.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          <div className="col-span-1 md:col-span-2">
+            <h3 className="text-3xl font-display font-bold text-white mb-4 tracking-tight">Get In Touch</h3>
+            <p className="text-zinc-400 font-light leading-relaxed mb-8 text-sm">
+              I'm always open to discussing new projects, creative ideas, or opportunities to collaborate. Drop me a message and I'll get back to you!
+            </p>
+
+            <div className="flex flex-col gap-6">
+              {/* Email */}
+              <a href="mailto:alanbenny1357@gmail.com" className="flex items-center gap-5 group cursor-pointer w-fit">
+                <div className="w-12 h-12 rounded-[1rem] bg-[#1c1c1c] border border-white/5 flex items-center justify-center shrink-0 group-hover:bg-[#d4f600]/10 group-hover:border-[#d4f600]/30 transition-colors">
+                  <Mail className="w-5 h-5 text-zinc-400 group-hover:text-[#d4f600] transition-colors" />
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-500 font-medium mb-1">Email</p>
+                  <p className="text-sm font-semibold text-white group-hover:text-[#d4f600] transition-colors">alanbenny1357@gmail.com</p>
+                </div>
+              </a>
+
+              {/* GitHub */}
+              <a href="https://github.com/Alanbenny123" target="_blank" rel="noreferrer" className="flex items-center gap-5 group cursor-pointer w-fit">
+                <div className="w-12 h-12 rounded-[1rem] bg-[#1c1c1c] border border-white/5 flex items-center justify-center shrink-0 group-hover:bg-[#d4f600]/10 group-hover:border-[#d4f600]/30 transition-colors">
+                  <Github className="w-5 h-5 text-zinc-400 group-hover:text-[#d4f600] transition-colors" />
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-500 font-medium mb-1">GitHub</p>
+                  <p className="text-sm font-semibold text-white group-hover:text-[#d4f600] transition-colors">github.com/Alanbenny123</p>
+                </div>
+              </a>
+
+              {/* LinkedIn */}
+              <a href="https://www.linkedin.com/in/alan-benny-7b8601292" target="_blank" rel="noreferrer" className="flex items-center gap-5 group cursor-pointer w-fit">
+                <div className="w-12 h-12 rounded-[1rem] bg-[#1c1c1c] border border-white/5 flex items-center justify-center shrink-0 group-hover:bg-[#d4f600]/10 group-hover:border-[#d4f600]/30 transition-colors">
+                  <Linkedin className="w-5 h-5 text-zinc-400 group-hover:text-[#d4f600] transition-colors" />
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-500 font-medium mb-1">LinkedIn</p>
+                  <p className="text-sm font-semibold text-white group-hover:text-[#d4f600] transition-colors">Alan Benny</p>
+                </div>
+              </a>
+
+              {/* Twitter / X */}
+              <a href="https://x.com/Alan_Benny199" target="_blank" rel="noreferrer" className="flex items-center gap-5 group cursor-pointer w-fit">
+                <div className="w-12 h-12 rounded-[1rem] bg-[#1c1c1c] border border-white/5 flex items-center justify-center shrink-0 group-hover:bg-[#d4f600]/10 group-hover:border-[#d4f600]/30 transition-colors">
+                  <XLogo className="w-5 h-5 text-zinc-400 group-hover:text-[#d4f600] transition-colors" />
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-500 font-medium mb-1">Twitter / X</p>
+                  <p className="text-sm font-semibold text-white group-hover:text-[#d4f600] transition-colors">@Alan_Benny199</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 pt-8 flex justify-between items-center text-[10px] text-zinc-600 uppercase tracking-widest font-semibold border-t border-white/5 relative z-10">
+          <p>© 2025 ALAN BENNY. ALL RIGHTS RESERVED.</p>
+        </div>
+      </footer>
     </div>
   );
 }
