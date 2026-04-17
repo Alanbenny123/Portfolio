@@ -1,11 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import emailjs from '@emailjs/browser'
 import './App.css'
+
+const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
 
 function App() {
   const [scrolled, setScrolled] = useState(false) // kept for navbar class only
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [formStatus, setFormStatus] = useState('idle') // idle | sending | success | error
+  const contactFormRef = useRef(null)
   const [skills, setSkills] = useState({
     programming: ['Python', 'JavaScript', 'TypeScript', 'HTML/CSS'],
     tools: ['Docker', 'GitHub', 'VS Code', 'Git'],
@@ -470,27 +477,52 @@ function App() {
               I'm always open to discussing new projects, creative ideas, or
               opportunities to be part of your visions.
             </p>
-            <form className="contact-form" onSubmit={(e) => {
-              e.preventDefault()
-              const formData = new FormData(e.target)
-              const name = formData.get('name')
-              const email = formData.get('email')
-              const message = formData.get('message')
-              const subject = `Portfolio Contact: ${name}`
-              const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`
-              window.location.href = `mailto:alanbenny1357@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`
-            }}>
-              <div className="form-group">
-                <input type="text" name="name" placeholder="Your Name" required />
+            {formStatus === 'success' ? (
+              <div className="contact-success">
+                <div className="success-icon">✓</div>
+                <h3>Message Sent!</h3>
+                <p>Thanks for reaching out. I'll get back to you soon.</p>
+                <button className="btn btn-secondary" onClick={() => setFormStatus('idle')}>Send Another</button>
               </div>
-              <div className="form-group">
-                <input type="email" name="email" placeholder="Your Email" required />
-              </div>
-              <div className="form-group">
-                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-              </div>
-              <button type="submit" className="btn btn-primary">Send Message</button>
-            </form>
+            ) : (
+              <form
+                ref={contactFormRef}
+                className="contact-form"
+                onSubmit={async (e) => {
+                  e.preventDefault()
+                  setFormStatus('sending')
+                  try {
+                    await emailjs.sendForm(
+                      EMAILJS_SERVICE_ID,
+                      EMAILJS_TEMPLATE_ID,
+                      contactFormRef.current,
+                      { publicKey: EMAILJS_PUBLIC_KEY }
+                    )
+                    setFormStatus('success')
+                  } catch {
+                    setFormStatus('error')
+                  }
+                }}
+              >
+                <div className="form-group">
+                  <input type="text" name="from_name" placeholder="Your Name" required />
+                </div>
+                <div className="form-group">
+                  <input type="email" name="from_email" placeholder="Your Email" required />
+                </div>
+                <div className="form-group">
+                  <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                {formStatus === 'error' && (
+                  <p style={{ color: '#f87171', marginBottom: '1rem', fontSize: '0.9rem' }}>
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+                <button type="submit" className="btn btn-primary" disabled={formStatus === 'sending'}>
+                  {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
+                </button>
+              </form>
+            )}
             <div className="social-links">
               <a href="https://github.com/Alanbenny123" target="_blank" rel="noopener noreferrer" className="social-link">GitHub</a>
               <a href="https://www.linkedin.com/in/alan-benny-7b8601292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
