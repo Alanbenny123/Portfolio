@@ -137,11 +137,11 @@ export default function App() {
               <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-b from-[#d4f600]/30 to-transparent p-[1px]">
                  <div className="w-full h-full rounded-[2.5rem] bg-[#0c0c0c] overflow-hidden relative">
                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0c0c0c] z-10" />
-                   <img 
-                     src="/profile.png" 
-                     alt="Alan Benny" 
-                     className="w-full h-full object-cover object-top grayscale hover:grayscale-[0.2] transition-all duration-700 opacity-80"
-                   />
+                  <img 
+                    src="/profile.webp" 
+                    alt="Alan Benny" 
+                    className="w-full h-full object-cover object-top transition-all duration-700 opacity-80"
+                  />
                  </div>
               </div>
             </motion.div>
