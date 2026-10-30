@@ -1,14 +1,11 @@
 import { motion } from 'motion/react';
+import { useState } from 'react';
 import { 
   ArrowUpRight, 
   Settings, 
   MonitorSmartphone, 
   Lightbulb, 
   Rocket,
-  Cloud,
-  Code2,
-  ShieldCheck,
-  Cpu,
   Github,
   Linkedin,
   Mail,
@@ -20,7 +17,9 @@ import {
   Wallet,
   Video,
   Tv,
-  Vote
+  Vote,
+  Menu,
+  X,
 } from 'lucide-react';
 
 const XLogo = ({ className }: { className?: string }) => (
@@ -30,6 +29,8 @@ const XLogo = ({ className }: { className?: string }) => (
 );
 
 export default function App() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#0c0c0c] text-zinc-300 font-sans selection:bg-[#d4f600]/30 selection:text-white overflow-hidden relative">
       
@@ -53,9 +54,33 @@ export default function App() {
             <a href="#skills" className="text-xs tracking-wider uppercase font-semibold text-zinc-500 hover:text-white transition-colors">Skills</a>
           </div>
 
-          <a href="#contact" className="bg-[#d4f600] hover:bg-[#bde000] transition-all text-black px-7 py-2.5 rounded-full text-sm font-semibold shadow-[0_0_20px_rgba(212,246,0,0.2)] inline-block">
-            Contact Me
-          </a>
+          <div className="flex items-center gap-3">
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="bg-[#d4f600] hover:bg-[#bde000] transition-all text-black px-5 md:px-7 py-2.5 rounded-full text-sm font-semibold shadow-[0_0_20px_rgba(212,246,0,0.2)] inline-block">
+              Contact Me
+            </a>
+            <button
+              type="button"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-controls="mobile-navigation"
+              aria-expanded={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen(open => !open)}
+              className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 text-white"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+        <div id="mobile-navigation" className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:hidden flex-col gap-1 border-t border-white/10 bg-[#151515] px-6 py-4`}>
+          {[
+            { name: 'About Me', href: '#about' },
+            { name: 'Projects', href: '#projects' },
+            { name: 'Education', href: '#education' },
+            { name: 'Skills', href: '#skills' },
+          ].map(link => (
+            <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-3 text-sm font-medium text-zinc-300 hover:bg-white/5 hover:text-[#d4f600]">
+              {link.name}
+            </a>
+          ))}
         </div>
       </nav>
 
@@ -119,7 +144,7 @@ export default function App() {
              {/* Stacked Roles */}
              <div className="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-6 hidden md:flex">
                {['AI/ML Engineer', 'Web Dev', 'CS Student'].map((role, i) => (
-                 <div key={i} className="flex items-center gap-4 w-48 group cursor-pointer">
+                 <div key={i} className="flex items-center gap-4 w-48 group">
                    <div className="text-xs uppercase tracking-widest font-medium text-white transition-colors group-hover:text-[#d4f600]">{role}</div>
                    <div className="flex-1 h-[1px] bg-white/10 relative transition-colors group-hover:bg-[#d4f600]">
                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-zinc-500 rounded-full transition-colors group-hover:bg-[#d4f600]"></div>
@@ -149,7 +174,7 @@ export default function App() {
         </section>
 
         {/* About Me Bento */}
-        <section id="about" className="max-w-7xl mx-auto px-6 mb-32">
+        <section id="about" className="max-w-7xl mx-auto px-6 mb-32 scroll-mt-24">
           <motion.div 
             initial={{ y: 40, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -166,7 +191,7 @@ export default function App() {
             </div>
             
             <div className="lg:w-[55%] flex flex-col gap-5 w-full z-10">
-              <div className="bg-[#1a1a1a] p-5 rounded-[1.5rem] border border-[#d4f600]/10 flex items-center gap-6 group/card hover:bg-[#202020] hover:border-[#d4f600]/30 transition-colors cursor-pointer">
+              <div className="bg-[#1a1a1a] p-5 rounded-[1.5rem] border border-[#d4f600]/10 flex items-center gap-6 group/card hover:bg-[#202020] hover:border-[#d4f600]/30 transition-colors">
                 <div className="w-12 h-12 rounded-2xl bg-[#d4f600] flex items-center justify-center shrink-0">
                   <div className="w-5 h-5 rounded-[6px] bg-[#0c0c0c]" />
                 </div>
@@ -175,12 +200,9 @@ export default function App() {
                     Build fast, modern web apps with React, Vite, and Tailwind CSS.
                   </p>
                 </div>
-                <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center shrink-0 group-hover/card:bg-[#d4f600] group-hover/card:border-[#d4f600] group-hover/card:text-black transition-all">
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
               </div>
 
-              <div className="bg-[#1a1a1a] p-5 rounded-[1.5rem] border border-[#d4f600]/10 flex items-center gap-6 group/card hover:bg-[#202020] hover:border-[#d4f600]/30 transition-colors cursor-pointer">
+              <div className="bg-[#1a1a1a] p-5 rounded-[1.5rem] border border-[#d4f600]/10 flex items-center gap-6 group/card hover:bg-[#202020] hover:border-[#d4f600]/30 transition-colors">
                 <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover/card:bg-[#d4f600] transition-colors">
                   <div className="grid grid-cols-2 gap-1 w-5 h-5">
                     <div className="bg-[#c0c0c0] group-hover/card:bg-[#0c0c0c] rounded-sm transition-colors" />
@@ -194,16 +216,13 @@ export default function App() {
                     Python, JavaScript, TypeScript — AI/ML, computer vision, and full-stack development.
                   </p>
                 </div>
-                <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center shrink-0 group-hover/card:bg-[#d4f600] group-hover/card:border-[#d4f600] group-hover/card:text-black transition-all">
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
               </div>
             </div>
           </motion.div>
         </section>
 
         {/* Project Showcase */}
-        <section id="projects" className="max-w-7xl mx-auto px-6 mb-32">
+        <section id="projects" className="max-w-7xl mx-auto px-6 mb-32 scroll-mt-24">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
             <div>
               <h3 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tight mb-4">
@@ -327,7 +346,7 @@ export default function App() {
         </section>
 
         {/* Education & Highlights */}
-        <section id="education" className="max-w-5xl mx-auto px-6 mb-32 flex flex-col items-center">
+        <section id="education" className="max-w-5xl mx-auto px-6 mb-32 flex flex-col items-center scroll-mt-24">
           <h3 className="text-4xl md:text-5xl font-display font-bold text-white text-center mb-16 tracking-tight">
             Education & Highlights
           </h3>
@@ -374,7 +393,7 @@ export default function App() {
         </section>
 
         {/* Skills */}
-        <section id="skills" className="max-w-7xl mx-auto px-6 mb-32">
+        <section id="skills" className="max-w-7xl mx-auto px-6 mb-32 scroll-mt-24">
           <h3 className="text-3xl font-display font-medium text-white text-center mb-16 tracking-tight">Let's Explore Popular<br/>Skills & Experience</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -387,7 +406,7 @@ export default function App() {
               <motion.div 
                 whileHover={{ y: -5 }}
                 key={i} 
-                className={`p-[1px] rounded-[2rem] overflow-hidden ${skill.active ? 'bg-gradient-to-b from-[#d4f600]/40 to-transparent' : 'bg-white/5 hover:bg-white/10'} transition-all duration-300 group cursor-pointer`}
+                className={`p-[1px] rounded-[2rem] overflow-hidden ${skill.active ? 'bg-gradient-to-b from-[#d4f600]/40 to-transparent' : 'bg-white/5 hover:bg-white/10'} transition-all duration-300 group`}
               >
                 <div className={`h-full p-8 rounded-[2rem] ${skill.active ? 'bg-[#151515]' : 'bento-card'} flex flex-col items-start`}>
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-8 border ${skill.active ? 'bg-[#d4f600] border-[#d4f600] shadow-[0_0_15px_rgba(212,246,0,0.4)]' : 'bg-zinc-800/50 border-white/10 group-hover:border-[#d4f600]/50'} transition-all`} >
@@ -404,7 +423,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer id="contact" className="border-t border-white/5 bg-[#0a0a0a] pt-24 pb-12 relative overflow-hidden">
+      <footer id="contact" className="border-t border-white/5 bg-[#0a0a0a] pt-24 pb-12 relative overflow-hidden scroll-mt-24">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#d4f600]/5 blur-[120px] rounded-t-full pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 relative z-10">
