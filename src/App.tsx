@@ -7,6 +7,7 @@ import {
   Linkedin,
   Mail,
   GraduationCap,
+  ShieldCheck,
   BookOpen,
   Activity,
   Camera,
@@ -412,6 +413,24 @@ export default function App() {
           </h3>
 
           <div className="w-full flex flex-col gap-6">
+            {/* Current cybersecurity course */}
+            <div className="bg-[#151515] border border-white/5 rounded-[2rem] flex flex-col md:flex-row-reverse shadow-2xl overflow-hidden hover:border-[#d4f600]/20 transition-colors">
+              <div className="p-8 md:p-12 md:w-3/5 flex flex-col justify-center">
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="px-3 py-1 rounded-full border border-[#d4f600]/20 text-[#d4f600] bg-[#d4f600]/5 text-xs font-mono font-medium tracking-wider">Currently studying</span>
+                  <span className="px-3 py-1 rounded-full border border-white/5 text-zinc-400 bg-white/5 text-xs font-mono font-medium tracking-wider">Cybersecurity</span>
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-2">ADIS — Advanced Diploma in Information Security</h4>
+                <p className="text-[#d4f600] mb-6 text-sm font-medium">Offenso Hackers Academy, Palarivattom, Kochi</p>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed">
+                  Currently studying cybersecurity through Offenso's ADIS course, with a focus on information security and practical security training.
+                </p>
+              </div>
+              <div className="md:w-2/5 bg-[#121212] flex items-center justify-center p-12 min-h-[250px] border-t md:border-t-0 md:border-r border-white/5">
+                <ShieldCheck className="w-24 h-24 drop-shadow-2xl stroke-zinc-400 hover:stroke-[#d4f600] opacity-90 transform hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
+              </div>
+            </div>
+
             {/* B.Tech */}
             <div className="bg-[#151515] border border-white/5 rounded-[2rem] flex flex-col-reverse md:flex-row shadow-2xl overflow-hidden hover:border-[#d4f600]/20 transition-colors">
               <div className="p-8 md:p-12 md:w-3/5 flex flex-col justify-center">
