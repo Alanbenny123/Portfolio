@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { 
   ArrowUpRight, 
   Settings, 
@@ -22,6 +22,15 @@ import {
   X,
 } from 'lucide-react';
 
+const navLinks = [
+  { id: 'about', name: 'About Me' },
+  { id: 'projects', name: 'Projects' },
+  { id: 'education', name: 'Education' },
+  { id: 'skills', name: 'Skills' },
+] as const;
+
+type SectionId = (typeof navLinks)[number]['id'];
+
 const XLogo = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -30,6 +39,43 @@ const XLogo = ({ className }: { className?: string }) => (
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<SectionId>('about');
+
+  useEffect(() => {
+    let frame: number | null = null;
+
+    const updateActiveSection = () => {
+      const marker = Math.min(window.innerHeight * 0.35, 280);
+      let current: SectionId = 'about';
+
+      for (const link of navLinks) {
+        const section = document.getElementById(link.id);
+        if (section && section.getBoundingClientRect().top <= marker) {
+          current = link.id;
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const scheduleUpdate = () => {
+      if (frame !== null) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = null;
+        updateActiveSection();
+      });
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      if (frame !== null) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0c0c0c] text-zinc-300 font-sans selection:bg-[#d4f600]/30 selection:text-white overflow-hidden relative">
@@ -41,17 +87,24 @@ export default function App() {
       </div>
 
       {/* Navbar */}
-      <nav className="fixed top-0 w-full z-50 glass-panel">
+      <nav aria-label="Primary navigation" className="fixed top-0 w-full z-50 glass-panel">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="w-8 h-8 rounded-lg bg-[#d4f600] flex items-center justify-center shadow-lg shadow-[#d4f600]/20">
             <Rocket className="w-4 h-4 text-black" />
           </div>
           
           <div className="hidden md:flex items-center gap-8 bg-[#151515] rounded-full px-8 py-3 border border-white/10 shadow-xl">
-            <a href="#about" className="text-xs tracking-wider uppercase font-bold hover:text-white transition-colors text-[#d4f600]">About Me</a>
-            <a href="#projects" className="text-xs tracking-wider uppercase font-semibold text-zinc-500 hover:text-white transition-colors">Projects</a>
-            <a href="#education" className="text-xs tracking-wider uppercase font-semibold text-zinc-500 hover:text-white transition-colors">Education</a>
-            <a href="#skills" className="text-xs tracking-wider uppercase font-semibold text-zinc-500 hover:text-white transition-colors">Skills</a>
+            {navLinks.map(link => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                aria-current={activeSection === link.id ? 'location' : undefined}
+                onClick={() => setActiveSection(link.id)}
+                className={`text-xs tracking-wider uppercase hover:text-white transition-colors ${activeSection === link.id ? 'font-bold text-[#d4f600]' : 'font-semibold text-zinc-500'}`}
+              >
+                {link.name}
+              </a>
+            ))}
           </div>
 
           <div className="flex items-center gap-3">
@@ -71,13 +124,17 @@ export default function App() {
           </div>
         </div>
         <div id="mobile-navigation" className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:hidden flex-col gap-1 border-t border-white/10 bg-[#151515] px-6 py-4`}>
-          {[
-            { name: 'About Me', href: '#about' },
-            { name: 'Projects', href: '#projects' },
-            { name: 'Education', href: '#education' },
-            { name: 'Skills', href: '#skills' },
-          ].map(link => (
-            <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-3 text-sm font-medium text-zinc-300 hover:bg-white/5 hover:text-[#d4f600]">
+          {navLinks.map(link => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              aria-current={activeSection === link.id ? 'location' : undefined}
+              onClick={() => {
+                setActiveSection(link.id);
+                setMobileMenuOpen(false);
+              }}
+              className={`rounded-lg px-3 py-3 text-sm font-medium hover:bg-white/5 hover:text-[#d4f600] ${activeSection === link.id ? 'text-[#d4f600]' : 'text-zinc-300'}`}
+            >
               {link.name}
             </a>
           ))}
