@@ -30,7 +30,7 @@ const navLinks = [
 const skillGroups = [
   { title: 'Web', skills: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Responsive design'] },
   { title: 'AI and data', skills: ['Python', 'Machine learning', 'Computer vision'] },
-  { title: 'Tools and deployment', skills: ['Git', 'GitHub', 'Vite', 'AWS', 'Streamlit'] },
+  { title: 'Tools and deployment', skills: ['Git', 'GitHub', 'Vite', 'AWS', 'Streamlit', 'Vercel'] },
 ] as const;
 
 type SectionId = (typeof navLinks)[number]['id'];
