@@ -2,9 +2,6 @@ import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { 
   ArrowUpRight, 
-  Settings, 
-  MonitorSmartphone, 
-  Lightbulb, 
   Rocket,
   Github,
   Linkedin,
@@ -27,6 +24,12 @@ const navLinks = [
   { id: 'projects', name: 'Projects' },
   { id: 'education', name: 'Education' },
   { id: 'skills', name: 'Skills' },
+] as const;
+
+const skillGroups = [
+  { title: 'Web', skills: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Responsive design'] },
+  { title: 'AI and data', skills: ['Python', 'Machine learning', 'Computer vision'] },
+  { title: 'Tools and deployment', skills: ['Git', 'GitHub', 'Vite', 'AWS', 'Streamlit'] },
 ] as const;
 
 type SectionId = (typeof navLinks)[number]['id'];
@@ -451,27 +454,23 @@ export default function App() {
 
         {/* Skills */}
         <section id="skills" className="max-w-7xl mx-auto px-6 mb-32 scroll-mt-24">
-          <h3 className="text-3xl font-display font-medium text-white text-center mb-16 tracking-tight">Let's Explore Popular<br/>Skills & Experience</h3>
+          <h3 className="text-3xl md:text-4xl font-display font-medium text-white text-center mb-12 tracking-tight">My Skills</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { icon: Settings, title: "Fast", desc: "Optimal performance, ensuring quick load times and seamless user experience.", active: true },
-              { icon: MonitorSmartphone, title: "Responsive", desc: "Adaptive layouts designed to work flawlessly on any screen size from mobile to desktop." },
-              { icon: Lightbulb, title: "Intuitive", desc: "Crafting user-friendly interfaces that prioritize ease of navigation." },
-              { icon: Rocket, title: "Dynamic", desc: "Bringing web pages to life with interactive elements and modern animations." }
-            ].map((skill, i) => (
-              <motion.div 
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {skillGroups.map(group => (
+              <motion.div
                 whileHover={{ y: -5 }}
-                key={i} 
-                className={`p-[1px] rounded-[2rem] overflow-hidden ${skill.active ? 'bg-gradient-to-b from-[#d4f600]/40 to-transparent' : 'bg-white/5 hover:bg-white/10'} transition-all duration-300 group`}
+                key={group.title}
+                className="bento-card rounded-[2rem] p-8 hover:border-[#d4f600]/30 transition-colors"
               >
-                <div className={`h-full p-8 rounded-[2rem] ${skill.active ? 'bg-[#151515]' : 'bento-card'} flex flex-col items-start`}>
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-8 border ${skill.active ? 'bg-[#d4f600] border-[#d4f600] shadow-[0_0_15px_rgba(212,246,0,0.4)]' : 'bg-zinc-800/50 border-white/10 group-hover:border-[#d4f600]/50'} transition-all`} >
-                    <skill.icon className={`w-5 h-5 ${skill.active ? 'text-black' : 'text-zinc-400 group-hover:text-[#d4f600] transition-colors'}`} />
-                  </div>
-                  <h4 className="text-lg font-medium text-white mb-3">{skill.title}</h4>
-                  <p className="text-sm text-zinc-500 font-light leading-relaxed group-hover:text-zinc-400 transition-colors">{skill.desc}</p>
-                </div>
+                <h4 className="text-lg font-display font-semibold text-[#d4f600] mb-6">{group.title}</h4>
+                <ul className="flex flex-wrap gap-3">
+                  {group.skills.map(skill => (
+                    <li key={skill} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200">
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
