@@ -326,9 +326,14 @@ export default function App() {
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
                 Personal finance tracker with category management, flexible dates, and Excel export.
               </p>
-              <a href="https://trackmyrupees.streamlit.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mb-8 transition-colors">
-                Live Demo <ArrowUpRight className="w-3 h-3" />
-              </a>
+              <div className="flex flex-wrap gap-x-5 gap-y-2 mb-8">
+                <a href="https://github.com/Alanbenny123/Expenses_tracker_with_GUI" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit transition-colors">
+                  View Code <ArrowUpRight className="w-3 h-3" />
+                </a>
+                <a href="https://trackmyrupees.streamlit.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit transition-colors">
+                  Live Demo <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
               <div className="w-full flex justify-center mt-auto">
                  <Wallet className="w-16 h-16 drop-shadow-2xl stroke-zinc-400 group-hover:stroke-[#d4f600] opacity-90 transform group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               </div>
@@ -341,9 +346,14 @@ export default function App() {
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
                 AI-powered video upscaling application.
               </p>
-              <a href="https://video-upscaler.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mb-8 transition-colors">
-                Live Demo <ArrowUpRight className="w-3 h-3" />
-              </a>
+              <div className="flex flex-wrap gap-x-5 gap-y-2 mb-8">
+                <a href="https://github.com/Alanbenny123/Video-upscaler" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit transition-colors">
+                  View Code <ArrowUpRight className="w-3 h-3" />
+                </a>
+                <a href="https://video-upscaler.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit transition-colors">
+                  Live Demo <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
               <div className="w-full flex justify-center mt-auto">
                  <Video className="w-16 h-16 drop-shadow-2xl stroke-zinc-400 group-hover:stroke-[#d4f600] opacity-90 transform group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               </div>
@@ -386,9 +396,14 @@ export default function App() {
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
                 Event ticket management with QR scanning, team changes, ticket swaps, and attendance.
               </p>
-              <a href="https://github.com/Alanbenny123/ticketer_brahma26" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
-                View Code <ArrowUpRight className="w-3 h-3" />
-              </a>
+              <div className="mt-auto flex flex-wrap gap-x-4 gap-y-2">
+                <a href="https://github.com/Alanbenny123/ticketer_brahma26" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit transition-colors">
+                  View Code <ArrowUpRight className="w-3 h-3" />
+                </a>
+                <a href="https://ticketer-brahma26.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit transition-colors">
+                  Live Demo <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
             </div>
 
             {/* Brahma26 Admin */}
@@ -399,9 +414,14 @@ export default function App() {
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
                 Admin dashboard for Brahma 2026 events, tickets, attendance, transactions, and reports.
               </p>
-              <a href="https://github.com/Alanbenny123/brahma26_admin" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
-                View Code <ArrowUpRight className="w-3 h-3" />
-              </a>
+              <div className="mt-auto flex flex-wrap gap-x-4 gap-y-2">
+                <a href="https://github.com/Alanbenny123/brahma26_admin" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit transition-colors">
+                  View Code <ArrowUpRight className="w-3 h-3" />
+                </a>
+                <a href="https://admin.brahma26.com/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit transition-colors">
+                  Live Demo <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
