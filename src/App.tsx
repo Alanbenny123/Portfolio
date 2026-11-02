@@ -10,12 +10,12 @@ import {
   ShieldCheck,
   BookOpen,
   Activity,
-  Camera,
-  BusFront,
   Wallet,
   Video,
-  Tv,
-  Vote,
+  Search,
+  MapPin,
+  Ticket,
+  LayoutDashboard,
   Menu,
   X,
 } from 'lucide-react';
@@ -319,88 +319,88 @@ export default function App() {
               </div>
             </div>
 
-            {/* Insta Grabber */}
+            {/* Expenses Tracker */}
             <div className="col-span-1 bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-8 flex flex-col group transition-colors">
-              <div className="text-blue-400 text-xs font-medium mb-2">TypeScript</div>
-              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Insta Grabber</h4>
+              <div className="text-blue-400 text-xs font-medium mb-2">Python</div>
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Expenses Tracker</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
-                Instagram reels & photos downloader without watermark.
+                Personal finance tracker with category management, flexible dates, and Excel export.
               </p>
-              <a href="https://insta-grabber-black.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mb-8 transition-colors">
+              <a href="https://trackmyrupees.streamlit.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mb-8 transition-colors">
                 Live Demo <ArrowUpRight className="w-3 h-3" />
               </a>
               <div className="w-full flex justify-center mt-auto">
-                 <Camera className="w-16 h-16 drop-shadow-2xl stroke-zinc-400 group-hover:stroke-[#d4f600] opacity-90 transform group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
+                 <Wallet className="w-16 h-16 drop-shadow-2xl stroke-zinc-400 group-hover:stroke-[#d4f600] opacity-90 transform group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               </div>
             </div>
 
-            {/* Bus Tracker */}
+            {/* Video Upscaler */}
             <div className="col-span-1 bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-8 flex flex-col group transition-colors">
               <div className="text-blue-400 text-xs font-medium mb-2">TypeScript</div>
-              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Bus Tracker</h4>
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Video Upscaler</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
-                Real-time bus tracking application.
+                AI-powered video upscaling application.
               </p>
-              <a href="https://bustracker-pi.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mb-8 transition-colors">
+              <a href="https://video-upscaler.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mb-8 transition-colors">
                 Live Demo <ArrowUpRight className="w-3 h-3" />
               </a>
               <div className="w-full flex justify-center mt-auto">
-                 <BusFront className="w-16 h-16 drop-shadow-2xl stroke-zinc-400 group-hover:stroke-[#d4f600] opacity-90 transform group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
+                 <Video className="w-16 h-16 drop-shadow-2xl stroke-zinc-400 group-hover:stroke-[#d4f600] opacity-90 transform group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               </div>
             </div>
           </div>
 
-          {/* Bottom 4 Cards */}
+          {/* More projects */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Expenses Tracker */}
+            {/* Auto Browser Search */}
             <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
-              <Wallet className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
+              <Search className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
               <div className="text-blue-400 text-xs font-medium mb-1">Python</div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Expenses Tracker</h4>
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Auto Browser Search</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
-                GUI-based personal finance tracker.
+                Automates browser searches from keyword lists with PyAutoGUI and optional dual-window support.
               </p>
-              <a href="https://trackmyrupees.streamlit.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
-                Live <ArrowUpRight className="w-3 h-3" />
+              <a href="https://github.com/Alanbenny123/auto-browser-search" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
+                View Code <ArrowUpRight className="w-3 h-3" />
               </a>
             </div>
 
-            {/* Video Upscaler */}
+            {/* Tracker Alarm */}
             <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
-              <Video className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
-              <div className="text-blue-400 text-xs font-medium mb-1">Mixed</div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Video Upscaler</h4>
+              <MapPin className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
+              <div className="text-blue-400 text-xs font-medium mb-1">Flutter</div>
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Tracker Alarm</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
-                AI-powered video upscaling application.
+                GPS destination alarms for transit trips, with map search and background alerts.
               </p>
-              <a href="https://video-upscaler.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
-                Live <ArrowUpRight className="w-3 h-3" />
+              <a href="https://github.com/Alanbenny123/Tracker_alarm" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
+                View Code <ArrowUpRight className="w-3 h-3" />
               </a>
             </div>
 
-            {/* Anime Grabber */}
+            {/* Ticketer Brahma26 */}
             <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
-              <Tv className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
-              <div className="text-blue-400 text-xs font-medium mb-1">Mixed</div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Anime Grabber</h4>
+              <Ticket className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
+              <div className="text-blue-400 text-xs font-medium mb-1">Next.js</div>
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Ticketer Brahma26</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
-                Anime content grabber application.
+                Event ticket management with QR scanning, team changes, ticket swaps, and attendance.
               </p>
-              <a href="https://anime-grabber.vercel.app/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
-                Live <ArrowUpRight className="w-3 h-3" />
+              <a href="https://github.com/Alanbenny123/ticketer_brahma26" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
+                View Code <ArrowUpRight className="w-3 h-3" />
               </a>
             </div>
 
-            {/* Serverless Poll */}
+            {/* Brahma26 Admin */}
             <div className="bg-[#151515] border border-white/5 hover:border-[#d4f600]/20 rounded-[1.5rem] p-6 flex flex-col group transition-colors">
-              <Vote className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
-              <div className="text-blue-400 text-xs font-medium mb-1">AWS</div>
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Serverless Poll</h4>
+              <LayoutDashboard className="w-8 h-8 mb-6 stroke-zinc-400 group-hover:stroke-[#d4f600] transform group-hover:scale-110 transition-all duration-500 origin-left" strokeWidth={1.5} />
+              <div className="text-blue-400 text-xs font-medium mb-1">Next.js</div>
+              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-[#d4f600] transition-colors">Brahma26 Admin</h4>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
-                Real-time serverless polling app on AWS.
+                Admin dashboard for Brahma 2026 events, tickets, attendance, transactions, and reports.
               </p>
-              <a href="http://polling-app-frontend-905418437059.s3-website-us-east-1.amazonaws.com/" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
-                Live <ArrowUpRight className="w-3 h-3" />
+              <a href="https://github.com/Alanbenny123/brahma26_admin" target="_blank" rel="noreferrer" className="text-[#d4f600] hover:text-[#bde000] text-sm font-medium flex items-center gap-1 w-fit mt-auto transition-colors">
+                View Code <ArrowUpRight className="w-3 h-3" />
               </a>
             </div>
           </div>
