@@ -40,6 +40,12 @@ const XLogo = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const BrandLogo = ({ className = '' }: { className?: string }) => (
+  <span role="img" aria-label="Alan Benny logo" className={`relative inline-block size-10 shrink-0 overflow-hidden rounded-full border border-white bg-black ${className}`}>
+    <img src="/ab-logo-circle.webp" alt="" aria-hidden="true" className="absolute left-1/2 top-1/2 block size-[60px] max-w-none -translate-x-1/2 -translate-y-1/2" />
+  </span>
+);
+
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId>('about');
@@ -92,7 +98,7 @@ export default function App() {
       {/* Navbar */}
       <nav aria-label="Primary navigation" className="fixed top-0 w-full z-50 glass-panel">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <img src="/ab-logo-circle.webp" alt="Alan Benny logo" className="w-12 h-12 object-contain" style={{ clipPath: 'circle(35.7% at 50% 50%)' }} />
+          <BrandLogo />
           
           <div className="hidden md:flex items-center gap-8 bg-[#151515] rounded-full px-8 py-3 border border-white/10 shadow-xl">
             {navLinks.map(link => (
@@ -520,7 +526,7 @@ export default function App() {
         
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 relative z-10">
           <div className="col-span-1 md:col-span-1 border-r border-white/5 pr-8 hidden md:block">
-            <img src="/ab-logo-circle.webp" alt="Alan Benny logo" loading="lazy" className="w-12 h-12 object-contain mb-8" style={{ clipPath: 'circle(35.7% at 50% 50%)' }} />
+            <BrandLogo className="mb-8" />
             <p className="text-zinc-500 text-xs font-light leading-relaxed max-w-[200px]">
               Get the latest updates, tech tips, and insights on IT solutions right in your inbox.
             </p>
