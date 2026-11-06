@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { 
   ArrowUpRight, 
-  Rocket,
   Github,
   Linkedin,
   Mail,
@@ -93,9 +92,7 @@ export default function App() {
       {/* Navbar */}
       <nav aria-label="Primary navigation" className="fixed top-0 w-full z-50 glass-panel">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="w-8 h-8 rounded-lg bg-[#d4f600] flex items-center justify-center shadow-lg shadow-[#d4f600]/20">
-            <Rocket className="w-4 h-4 text-black" />
-          </div>
+          <img src="/ab-logo-circle.png" alt="Alan Benny logo" className="w-12 h-12 object-contain" />
           
           <div className="hidden md:flex items-center gap-8 bg-[#151515] rounded-full px-8 py-3 border border-white/10 shadow-xl">
             {navLinks.map(link => (
@@ -523,9 +520,7 @@ export default function App() {
         
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 relative z-10">
           <div className="col-span-1 md:col-span-1 border-r border-white/5 pr-8 hidden md:block">
-            <div className="w-10 h-10 rounded-xl bg-[#d4f600] flex items-center justify-center mb-8 shadow-lg shadow-[#d4f600]/20">
-              <Rocket className="w-5 h-5 text-black" />
-            </div>
+            <img src="/ab-logo-circle.png" alt="Alan Benny logo" loading="lazy" className="w-12 h-12 object-contain mb-8" />
             <p className="text-zinc-500 text-xs font-light leading-relaxed max-w-[200px]">
               Get the latest updates, tech tips, and insights on IT solutions right in your inbox.
             </p>
