@@ -44,7 +44,7 @@ const BrandLogo = ({ className = '' }: { className?: string }) => (
   <span
     role="img"
     aria-label="Alan Benny logo"
-    className={`relative inline-block size-10 shrink-0 overflow-hidden rounded-full border border-white/70 bg-black ${className}`}
+    className={`relative inline-block size-10 shrink-0 overflow-hidden rounded-full border border-black bg-black ${className}`}
     style={{
       WebkitMaskImage: 'radial-gradient(circle at center, #000 18px, transparent 21px)',
       maskImage: 'radial-gradient(circle at center, #000 18px, transparent 21px)',
