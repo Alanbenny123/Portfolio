@@ -41,7 +41,15 @@ const XLogo = ({ className }: { className?: string }) => (
 );
 
 const BrandLogo = ({ className = '' }: { className?: string }) => (
-  <span role="img" aria-label="Alan Benny logo" className={`relative inline-block size-10 shrink-0 overflow-hidden rounded-full border border-white bg-black ${className}`}>
+  <span
+    role="img"
+    aria-label="Alan Benny logo"
+    className={`relative inline-block size-10 shrink-0 overflow-hidden rounded-full border border-white/70 bg-black ${className}`}
+    style={{
+      WebkitMaskImage: 'radial-gradient(circle at center, #000 18px, transparent 21px)',
+      maskImage: 'radial-gradient(circle at center, #000 18px, transparent 21px)',
+    }}
+  >
     <img src="/ab-logo-circle.webp" alt="" aria-hidden="true" className="absolute left-1/2 top-1/2 block size-[60px] max-w-none -translate-x-1/2 -translate-y-1/2" />
   </span>
 );
